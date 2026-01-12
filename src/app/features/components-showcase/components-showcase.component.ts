@@ -6,7 +6,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
-import { NavbarComponent } from '@shared/components/navbar';
 
 interface ComponentSection {
   name: string;
@@ -30,8 +29,7 @@ interface ComponentCategory {
     MatInputModule,
     MatFormFieldModule,
     FormsModule,
-    MatIconModule,
-    NavbarComponent
+    MatIconModule
   ],
   template: `
     <div class="showcase-layout">
@@ -98,11 +96,11 @@ interface ComponentCategory {
       overflow-y: auto;
       transition: width 0.3s ease, margin 0.3s ease;
       flex-shrink: 0;
-      
-      &.collapsed {
-        width: 0;
-        margin-left: -280px;
-      }
+    }
+    
+    .sidebar.collapsed {
+      width: 0;
+      margin-left: -280px;
     }
     
     .sidebar-search {
@@ -151,19 +149,19 @@ interface ComponentCategory {
       text-decoration: none;
       color: #49454f;
       transition: all 0.2s ease;
-      
-      &:hover {
-        background: #f5f5f5;
-      }
-      
-      &.active {
-        background: rgba(25, 118, 210, 0.1);
-        color: #1976d2;
-        
-        .nav-icon {
-          color: #1976d2;
-        }
-      }
+    }
+    
+    .nav-item:hover {
+      background: #f5f5f5;
+    }
+    
+    .nav-item.active {
+      background: rgba(25, 118, 210, 0.1);
+      color: #1976d2;
+    }
+    
+    .nav-item.active .nav-icon {
+      color: #1976d2;
     }
     
     .nav-icon {

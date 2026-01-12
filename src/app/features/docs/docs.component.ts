@@ -1,13 +1,12 @@
 import { Component, signal, inject, ElementRef, ViewChildren, QueryList, AfterViewInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { CardComponent } from '@shared/ui/card';
 import { DocsSidebarComponent, DocsNavItem } from './components/docs-sidebar';
 
 @Component({
   selector: 'app-docs',
-  imports: [CommonModule, RouterLink, MatIconModule, CardComponent, DocsSidebarComponent],
+  imports: [CommonModule, MatIconModule, CardComponent, DocsSidebarComponent],
   template: `
     <div class="docs-page">
         <app-docs-sidebar

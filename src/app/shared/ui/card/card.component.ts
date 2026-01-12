@@ -43,7 +43,7 @@ export interface CardTag {
             @if (avatarIcon()) {
               <mat-icon>{{ avatarIcon() }}</mat-icon>
             } @else {
-              {{ header()?.charAt(0) }}
+              {{ header().charAt(0) }}
             }
           </div>
           <mat-card-title>{{ header() }}</mat-card-title>
