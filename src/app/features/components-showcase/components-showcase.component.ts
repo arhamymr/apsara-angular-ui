@@ -5,6 +5,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 import { NavbarComponent } from '@shared/components/navbar';
 
 interface ComponentSection {
@@ -29,12 +30,11 @@ interface ComponentCategory {
     MatInputModule,
     MatFormFieldModule,
     FormsModule,
+    MatIconModule,
     NavbarComponent
   ],
   template: `
     <div class="showcase-layout">
-      <app-navbar />
-      
       <div class="showcase-container">
         <aside class="sidebar" [class.collapsed]="sidebarCollapsed()">
           <div class="sidebar-search">

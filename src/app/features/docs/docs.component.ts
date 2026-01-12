@@ -1,127 +1,121 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, inject, ElementRef, ViewChildren, QueryList, AfterViewInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { CardComponent } from '@shared/ui/card';
-import { ButtonComponent } from '@shared/ui/button';
-import { MenuComponent, type MenuItem } from '@shared/ui/menu';
-
-interface DocSection {
-  id: string;
-  title: string;
-  icon: string;
-}
+import { DocsSidebarComponent, DocsNavItem } from './components/docs-sidebar';
 
 @Component({
   selector: 'app-docs',
-  imports: [CommonModule, RouterOutlet, MatIconModule, CardComponent, ButtonComponent, MenuComponent],
+  imports: [CommonModule, RouterLink, MatIconModule, CardComponent, DocsSidebarComponent],
   template: `
     <div class="docs-page">
-      <header class="docs-header">
-        <div class="header-content">
-          <h1>Angular Dev Starter</h1>
-          <p class="version">v21.0.5</p>
-        </div>
-        <p class="description">
-          A modern Angular 21+ boilerplate with signals, standalone components, Material 3, 
-          and a comprehensive UI component library for building scalable web applications.
-        </p>
-      </header>
-
-      <nav class="docs-nav">
-        <app-menu 
-          label="Documentation" 
-          [items]="navItems"
-          triggerType="button"
-          color="neutral">
-        </app-menu>
-      </nav>
-
-      <main class="docs-content">
-        <app-card id="overview" variant="elevated" header="Overview" class="doc-card">
-          <p>
-            This boilerplate provides a production-ready foundation for building Angular applications 
-            with modern best practices. It includes everything you need to start developing quickly: 
-            a comprehensive component library, state management with signals, lazy-loaded routes, 
-            and Material 3 theming.
-          </p>
-          <div class="features-grid">
-            <div class="feature-item">
-              <mat-icon>signal_cellular_alt</mat-icon>
-              <span>Angular Signals</span>
-            </div>
-            <div class="feature-item">
-              <mat-icon>extension</mat-icon>
-              <span>Standalone Components</span>
-            </div>
-            <div class="feature-item">
-              <mat-icon>palette</mat-icon>
-              <span>Material 3</span>
-            </div>
-            <div class="feature-item">
-              <mat-icon>speed</mat-icon>
-              <span>OnPush Change Detection</span>
-            </div>
+        <app-docs-sidebar
+          [items]="navItems()"
+          [activeId]="activeSection()"
+          [isCollapsed]="sidebarCollapsed()"
+          (navigate)="scrollToSection($event)" />
+      
+      <main class="docs-content" [class.sidebar-collapsed]="sidebarCollapsed()">
+        <header class="docs-header">
+          <div class="header-content">
+            <h1>Angular Dev Starter</h1>
+            <p class="version">v21.0.5</p>
           </div>
-        </app-card>
+          <p class="description">
+            A modern Angular 21+ boilerplate with signals, standalone components, Material 3, 
+            and a comprehensive UI component library for building scalable web applications.
+          </p>
+        </header>
 
-        <app-card id="tech-stack" variant="elevated" header="Tech Stack" class="doc-card">
-          <table class="tech-table">
-            <thead>
-              <tr>
-                <th>Technology</th>
-                <th>Version</th>
-                <th>Purpose</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>Angular</code></td>
-                <td>21.0.5</td>
-                <td>Core framework with signals and standalone components</td>
-              </tr>
-              <tr>
-                <td><code>TypeScript</code></td>
-                <td>5.9.2</td>
-                <td>Type-safe development experience</td>
-              </tr>
-              <tr>
-                <td><code>RxJS</code></td>
-                <td>7.8.0</td>
-                <td>Reactive programming and async operations</td>
-              </tr>
-              <tr>
-                <td><code>Angular Material</code></td>
-                <td>21.0.6</td>
-                <td>Material Design 3 components and theming</td>
-              </tr>
-              <tr>
-                <td><code>Tailwind CSS</code></td>
-                <td>4.1.12</td>
-                <td>Utility-first CSS framework</td>
-              </tr>
-              <tr>
-                <td><code>SCSS</code></td>
-                <td>-</td>
-                <td>Component-level styling with variables</td>
-              </tr>
-              <tr>
-                <td><code>Vitest</code></td>
-                <td>4.0.8</td>
-                <td>Fast unit testing framework</td>
-              </tr>
-              <tr>
-                <td><code>Angular CLI</code></td>
-                <td>21.0.5</td>
-                <td>Build tool and development server</td>
-              </tr>
-            </tbody>
-          </table>
-        </app-card>
+        <section #sectionRef id="overview" class="doc-section">
+          <app-card variant="elevated" header="Overview" class="doc-card">
+            <p>
+              This boilerplate provides a production-ready foundation for building Angular applications 
+              with modern best practices. It includes everything you need to start developing quickly: 
+              a comprehensive component library, state management with signals, lazy-loaded routes, 
+              and Material 3 theming.
+            </p>
+            <div class="features-grid">
+              <div class="feature-item">
+                <mat-icon>signal_cellular_alt</mat-icon>
+                <span>Angular Signals</span>
+              </div>
+              <div class="feature-item">
+                <mat-icon>extension</mat-icon>
+                <span>Standalone Components</span>
+              </div>
+              <div class="feature-item">
+                <mat-icon>palette</mat-icon>
+                <span>Material 3</span>
+              </div>
+              <div class="feature-item">
+                <mat-icon>speed</mat-icon>
+                <span>OnPush Change Detection</span>
+              </div>
+            </div>
+          </app-card>
+        </section>
 
-        <app-card id="structure" variant="elevated" header="Project Structure" class="doc-card">
-          <pre class="structure-tree">
-src/
+        <section #sectionRef id="tech-stack" class="doc-section">
+          <app-card variant="elevated" header="Tech Stack" class="doc-card">
+            <table class="tech-table">
+              <thead>
+                <tr>
+                  <th>Technology</th>
+                  <th>Version</th>
+                  <th>Purpose</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>Angular</code></td>
+                  <td>21.0.5</td>
+                  <td>Core framework with signals and standalone components</td>
+                </tr>
+                <tr>
+                  <td><code>TypeScript</code></td>
+                  <td>5.9.2</td>
+                  <td>Type-safe development experience</td>
+                </tr>
+                <tr>
+                  <td><code>RxJS</code></td>
+                  <td>7.8.0</td>
+                  <td>Reactive programming and async operations</td>
+                </tr>
+                <tr>
+                  <td><code>Angular Material</code></td>
+                  <td>21.0.6</td>
+                  <td>Material Design 3 components and theming</td>
+                </tr>
+                <tr>
+                  <td><code>Tailwind CSS</code></td>
+                  <td>4.1.12</td>
+                  <td>Utility-first CSS framework</td>
+                </tr>
+                <tr>
+                  <td><code>SCSS</code></td>
+                  <td>-</td>
+                  <td>Component-level styling with variables</td>
+                </tr>
+                <tr>
+                  <td><code>Vitest</code></td>
+                  <td>4.0.8</td>
+                  <td>Fast unit testing framework</td>
+                </tr>
+                <tr>
+                  <td><code>Angular CLI</code></td>
+                  <td>21.0.5</td>
+                  <td>Build tool and development server</td>
+                </tr>
+              </tbody>
+            </table>
+          </app-card>
+        </section>
+
+        <section #sectionRef id="structure" class="doc-section">
+          <app-card variant="elevated" header="Project Structure" class="doc-card">
+            <pre class="structure-tree">src/
 ├── app/
 │   ├── core/                    # Singleton services, models, interceptors
 │   │   ├── models/              # TypeScript interfaces and types
@@ -163,241 +157,213 @@ src/
 ├── angular.json                 # Angular CLI configuration
 ├── package.json                 # Dependencies and scripts
 └── tsconfig.json                # TypeScript configuration</pre>
-        </app-card>
+          </app-card>
+        </section>
 
-        <app-card id="components" variant="elevated" header="UI Component Library" class="doc-card">
-          <p class="section-intro">
-            This starter includes a comprehensive reusable UI component library with 14+ components 
-            designed for consistency and developer experience.
-          </p>
-          
-          <h4>Available Components</h4>
-          <div class="component-categories">
-            <div class="category">
-              <h5>Form Controls</h5>
-              <ul>
-                <li><code>ButtonComponent</code> - Versatile button with variants, sizes, and states</li>
-                <li><code>InputComponent</code> - Text input with validation and icons</li>
-                <li><code>CheckboxComponent</code> - Material-style checkbox</li>
-                <li><code>TextareaComponent</code> - Multi-line text input</li>
-                <li><code>SelectComponent</code> - Dropdown selection</li>
-                <li><code>RadioComponent</code> - Radio button group</li>
-                <li><code>SwitchComponent</code> - Toggle switch</li>
-              </ul>
-            </div>
+        <section #sectionRef id="components" class="doc-section">
+          <app-card variant="elevated" header="UI Component Library" class="doc-card">
+            <p class="section-intro">
+              This starter includes a comprehensive reusable UI component library with 14+ components 
+              designed for consistency and developer experience.
+            </p>
             
-            <div class="category">
-              <h5>Layout</h5>
-              <ul>
-                <li><code>CardComponent</code> - Content container with variants</li>
-                <li><code>ToolbarComponent</code> - Top toolbar component</li>
-                <li><code>SidenavComponent</code> - Side navigation panel</li>
-              </ul>
+            <h4>Available Components</h4>
+            <div class="component-categories">
+              <div class="category">
+                <h5>Form Controls</h5>
+                <ul>
+                  <li><code>ButtonComponent</code> - Versatile button with variants, sizes, and states</li>
+                  <li><code>InputComponent</code> - Text input with validation and icons</li>
+                  <li><code>CheckboxComponent</code> - Material-style checkbox</li>
+                  <li><code>TextareaComponent</code> - Multi-line text input</li>
+                  <li><code>SelectComponent</code> - Dropdown selection</li>
+                  <li><code>RadioComponent</code> - Radio button group</li>
+                  <li><code>SwitchComponent</code> - Toggle switch</li>
+                </ul>
+              </div>
+              
+              <div class="category">
+                <h5>Layout</h5>
+                <ul>
+                  <li><code>CardComponent</code> - Content container with variants</li>
+                  <li><code>ToolbarComponent</code> - Top toolbar component</li>
+                  <li><code>SidenavComponent</code> - Side navigation panel</li>
+                </ul>
+              </div>
+              
+              <div class="category">
+                <h5>Navigation</h5>
+                <ul>
+                  <li><code>MenuComponent</code> - Dropdown menu with nested items</li>
+                </ul>
+              </div>
+              
+              <div class="category">
+                <h5>Popups & Modals</h5>
+                <ul>
+                  <li><code>DialogComponent</code> - Modal dialog</li>
+                  <li><code>SnackbarComponent</code> - Toast notifications</li>
+                </ul>
+              </div>
+              
+              <div class="category">
+                <h5>Data Table</h5>
+                <ul>
+                  <li><code>TableComponent</code> - Data grid with sorting</li>
+                </ul>
+              </div>
             </div>
+          </app-card>
+        </section>
+
+        <section #sectionRef id="patterns" class="doc-section">
+          <app-card variant="elevated" header="Key Angular Patterns" class="doc-card">
+            <h4>Signals for State Management</h4>
+            <p>Use signals for reactive state management with computed values and effects.</p>
+            <p>See <code>README.md</code> for detailed code examples.</p>
+
+            <h4>Standalone Components</h4>
+            <p>Components are standalone by default, eliminating the need for NgModules.</p>
+            <p>See <code>README.md</code> for detailed code examples.</p>
+
+            <h4>Modern Control Flow</h4>
+            <p>Use the new control flow syntax: <code>&#64;if</code>, <code>&#64;for</code>, <code>&#64;switch</code>.</p>
+            <p>See <code>README.md</code> for detailed code examples.</p>
+
+            <h4>Lazy Loading Routes</h4>
+            <p>Features are lazy-loaded for optimal performance.</p>
+            <p>See <code>README.md</code> for detailed code examples.</p>
+          </app-card>
+        </section>
+
+        <section #sectionRef id="theming" class="doc-section">
+          <app-card variant="elevated" header="Theming System" class="doc-card">
+            <p>
+              This project uses CSS custom properties (CSS variables) for easy theming, inspired by shadcn/ui.
+            </p>
             
-            <div class="category">
-              <h5>Navigation</h5>
-              <ul>
-                <li><code>MenuComponent</code> - Dropdown menu with nested items</li>
-              </ul>
-            </div>
-            
-            <div class="category">
-              <h5>Popups & Modals</h5>
-              <ul>
-                <li><code>DialogComponent</code> - Modal dialog</li>
-                <li><code>SnackbarComponent</code> - Toast notifications</li>
-              </ul>
-            </div>
-            
-            <div class="category">
-              <h5>Data Table</h5>
-              <ul>
-                <li><code>TableComponent</code> - Data grid with sorting</li>
-              </ul>
-            </div>
-          </div>
-        </app-card>
-
-        <app-card id="patterns" variant="elevated" header="Key Angular Patterns" class="doc-card">
-          <h4>Signals for State Management</h4>
-          <pre class="code-example">
-import {{ '{' }} signal, computed, effect {{ '}' }} from '@angular/core';
-
-@Component({{ '{' }}...{{ '}' }})
-export class MyComponent {{ '{' }}
-  count = signal(0);
-  double = computed(() => this.count() * 2);
-  
-  constructor() {{ '{' }}
-    effect(() => {{ '{' }}
-      console.log('Count changed:', this.count());
-    {{ '}' }});
-  {{ '}' }}
-  
-  increment() {{ '{' }}
-    this.count.update(c => c + 1);
-  {{ '}' }}
-{{ '}' }}</pre>
-
-          <h4>Standalone Components</h4>
-          <pre class="code-example">
-import &#123; Component, input, output &#125; from &#39;@angular/core&#39;;
-
-@Component(&#123;
-  selector: &#39;app-my-component&#39;,
-  standalone: true,
-  imports: [CommonModule],
-  template: `&lt;button (click)=&quot;handleClick()&quot;&gt;&#123;&#123; label() &#125;&#125;&lt;/button&gt;`
-&#125;)
-export class MyComponent &#123;
-  label = input(&#39;Default&#39;);
-  clicked = output&lt;void&gt;();
-  
-  handleClick() &#123;
-    this.clicked.emit();
-  &#125;
-&#125;</pre>
-
-          <h4>Modern Control Flow</h4>
-          <pre class="code-example">
-@Component(&#123;
-  template: `
-    @if (showContent) &#123;
-      &lt;p&gt;Content is visible&lt;/p&gt;
-    &#125; @else &#123;
-      &lt;p&gt;Show placeholder&lt;/p&gt;
-    &#125;
-    
-    @for (item of items; track item.id) &#123;
-      &lt;li&gt;&#123;&#123; item.name &#125;&#125;&lt;/li&gt;
-    &#125;
-    
-    @switch (status) &#123;
-      @case (&#39;success&#39;) &#123; &lt;p&gt;Success!&lt;/p&gt; &#125;
-      @case (&#39;error&#39;) &#123; &lt;p&gt;Error!&lt;/p&gt; &#125;
-      @default &#123; &lt;p&gt;Unknown status&lt;/p&gt; &#125;
-    &#125;
-  `
-&#125;)
-export class MyComponent &#123;&#125;</pre>
-
-          <h4>Lazy Loading Routes</h4>
-          <pre class="code-example">
-// app.routes.ts
-export const routes: Routes = [
-  &#123; path: &#39;&#39;, loadComponent: () =&gt; import(&#39;./features/home/home.component&#39;).then(m =&gt; m.HomeComponent) &#125;,
-  &#123; path: &#39;about&#39;, loadComponent: () =&gt; import(&#39;./features/about/about.component&#39;).then(m =&gt; m.AboutComponent) &#125;,
-  &#123; 
-    path: &#39;components&#39;, 
-    loadComponent: () =&gt; import(&#39;./features/components-showcase/components-showcase.component&#39;).then(m =&gt; m.ComponentsShowcaseComponent),
-    loadChildren: () =&gt; import(&#39;./features/components-showcase/components-showcase.routes&#39;).then(m =&gt; m.COMPONENTS_SHOWCASE_ROUTES)
-  &#125;,
-  &#123; path: &#39;**&#39;, redirectTo: &#39;&#39; &#125;
-];</pre>
-        </app-card>
-
-        <app-card id="theming" variant="elevated" header="Theming System" class="doc-card">
-          <p>
-            This project uses CSS custom properties (CSS variables) for easy theming, inspired by shadcn/ui.
-          </p>
-          
-          <h4>Theme Structure</h4>
-          <pre class="file-structure">
-src/
+            <h4>Theme Structure</h4>
+            <pre class="file-structure">src/
 ├── styles.css           # Entry point (DO NOT EDIT)
 ├── styles/
 │   ├── variables.css    # Base theme tokens (DO NOT EDIT)
 │   └── theme.css        # Your custom overrides (EDIT THIS)</pre>
 
-          <h4>Available CSS Variables</h4>
-          <div class="token-categories">
-            <div class="token-category">
-              <h5>Colors</h5>
-              <p><code>--color-primary-*</code>, <code>--color-accent-*</code>, <code>--color-success-*</code>, <code>--color-warning-*</code>, <code>--color-error-*</code>, <code>--color-gray-*</code>, <code>--color-surface*</code>, <code>--color-on-*</code></p>
+            <h4>Available CSS Variables</h4>
+            <div class="token-categories">
+              <div class="token-category">
+                <h5>Colors</h5>
+                <p><code>--color-primary-*</code>, <code>--color-accent-*</code>, <code>--color-success-*</code>, <code>--color-warning-*</code>, <code>--color-error-*</code>, <code>--color-gray-*</code>, <code>--color-surface*</code>, <code>--color-on-*</code></p>
+              </div>
+              <div class="token-category">
+                <h5>Spacing</h5>
+                <p><code>--spacing-0</code> through <code>--spacing-24</code></p>
+              </div>
+              <div class="token-category">
+                <h5>Border Radius</h5>
+                <p><code>--radius-sm</code>, <code>--radius-md</code>, <code>--radius-lg</code>, <code>--radius-xl</code></p>
+              </div>
+              <div class="token-category">
+                <h5>Shadows</h5>
+                <p><code>--shadow-1</code> through <code>--shadow-6</code>, <code>--shadow-elevated</code>, <code>--shadow-popover</code></p>
+              </div>
+              <div class="token-category">
+                <h5>Typography</h5>
+                <p><code>--font-family-*</code>, <code>--font-size-xs</code> through <code>--font-size-4xl</code>, <code>--font-weight-*</code></p>
+              </div>
             </div>
-            <div class="token-category">
-              <h5>Spacing</h5>
-              <p><code>--spacing-0</code> through <code>--spacing-24</code></p>
-            </div>
-            <div class="token-category">
-              <h5>Border Radius</h5>
-              <p><code>--radius-sm</code>, <code>--radius-md</code>, <code>--radius-lg</code>, <code>--radius-xl</code></p>
-            </div>
-            <div class="token-category">
-              <h5>Shadows</h5>
-              <p><code>--shadow-1</code> through <code>--shadow-6</code>, <code>--shadow-elevated</code>, <code>--shadow-popover</code></p>
-            </div>
-            <div class="token-category">
-              <h5>Typography</h5>
-              <p><code>--font-family-*</code>, <code>--font-size-xs</code> through <code>--font-size-4xl</code>, <code>--font-weight-*</code></p>
-            </div>
-          </div>
-        </app-card>
+          </app-card>
+        </section>
 
-        <app-card id="scripts" variant="elevated" header="Available Scripts" class="doc-card">
-          <table class="scripts-table">
-            <thead>
-              <tr>
-                <th>Command</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>ng serve</code> or <code>npm start</code></td>
-                <td>Start development server on port 4200</td>
-              </tr>
-              <tr>
-                <td><code>ng build</code></td>
-                <td>Build for production with optimization</td>
-              </tr>
-              <tr>
-                <td><code>ng build --configuration development</code></td>
-                <td>Build for development with source maps</td>
-              </tr>
-              <tr>
-                <td><code>ng test</code></td>
-                <td>Run unit tests with Vitest</td>
-              </tr>
-              <tr>
-                <td><code>ng test --coverage</code></td>
-                <td>Run tests with coverage report</td>
-              </tr>
-              <tr>
-                <td><code>ng test --watch</code></td>
-                <td>Run tests in watch mode</td>
-              </tr>
-            </tbody>
-          </table>
-        </app-card>
+        <section #sectionRef id="scripts" class="doc-section">
+          <app-card variant="elevated" header="Available Scripts" class="doc-card">
+            <table class="scripts-table">
+              <thead>
+                <tr>
+                  <th>Command</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>ng serve</code> or <code>npm start</code></td>
+                  <td>Start development server on port 4200</td>
+                </tr>
+                <tr>
+                  <td><code>ng build</code></td>
+                  <td>Build for production with optimization</td>
+                </tr>
+                <tr>
+                  <td><code>ng build --configuration development</code></td>
+                  <td>Build for development with source maps</td>
+                </tr>
+                <tr>
+                  <td><code>ng test</code></td>
+                  <td>Run unit tests with Vitest</td>
+                </tr>
+                <tr>
+                  <td><code>ng test --coverage</code></td>
+                  <td>Run tests with coverage report</td>
+                </tr>
+                <tr>
+                  <td><code>ng test --watch</code></td>
+                  <td>Run tests in watch mode</td>
+                </tr>
+              </tbody>
+            </table>
+          </app-card>
+        </section>
 
-        <app-card id="browser-support" variant="elevated" header="Browser Support" class="doc-card">
-          <ul class="browser-list">
-            <li><mat-icon>check</mat-icon> Chrome (latest)</li>
-            <li><mat-icon>check</mat-icon> Firefox (latest)</li>
-            <li><mat-icon>check</mat-icon> Safari (latest)</li>
-            <li><mat-icon>check</mat-icon> Edge (latest)</li>
-          </ul>
-        </app-card>
+        <section #sectionRef id="browser-support" class="doc-section">
+          <app-card variant="elevated" header="Browser Support" class="doc-card">
+            <ul class="browser-list">
+              <li><mat-icon>check</mat-icon> Chrome (latest)</li>
+              <li><mat-icon>check</mat-icon> Firefox (latest)</li>
+              <li><mat-icon>check</mat-icon> Safari (latest)</li>
+              <li><mat-icon>check</mat-icon> Edge (latest)</li>
+            </ul>
+          </app-card>
+        </section>
+
+        <section #sectionRef id="resources" class="doc-section">
+          <app-card variant="elevated" header="Resources" class="doc-card">
+            <p>For detailed code examples and advanced usage, refer to these resources:</p>
+            <ul class="resources-list">
+              <li><mat-icon>description</mat-icon> <a href="https://github.com/your-repo/angular-dev-starter" target="_blank">README.md</a> - Comprehensive documentation</li>
+              <li><mat-icon>code</mat-icon> <a href="/components">Component Showcase</a> - Live examples of all UI components</li>
+              <li><mat-icon>link</mat-icon> <a href="https://angular.dev" target="_blank">Angular Documentation</a> - Official Angular docs</li>
+              <li><mat-icon>link</mat-icon> <a href="https://material.angular.io" target="_blank">Angular Material</a> - Material Design components</li>
+            </ul>
+          </app-card>
+        </section>
+
+        <footer class="docs-footer">
+          <p>Angular Dev Starter - MIT License</p>
+        </footer>
       </main>
-
-      <footer class="docs-footer">
-        <p>Angular Dev Starter - MIT License</p>
-      </footer>
     </div>
   `,
   styles: [`
     .docs-page {
+      display: flex;
       min-height: 100vh;
       background: #f5f5f5;
+    }
+
+    .docs-content {
+      flex: 1;
+      margin-left: 0;
+      transition: margin-left 0.2s ease;
+    }
+
+    .docs-content.sidebar-collapsed {
+      margin-left: 0;
     }
 
     .docs-header {
       background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
       color: white;
       padding: 3rem 2rem;
-      text-align: center;
     }
 
     .header-content {
@@ -427,32 +393,16 @@ src/
       max-width: 800px;
       margin: 0 auto;
       line-height: 1.6;
+      text-align: center;
     }
 
-    .docs-nav {
-      background: white;
-      border-bottom: 1px solid #e0e0e0;
-      padding: 1rem 2rem;
-      display: flex;
-      gap: 0.5rem;
-      overflow-x: auto;
-    }
-
-    .docs-content {
-      max-width: 1200px;
-      margin: 0 auto;
+    .doc-section {
       padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
+      max-width: 1200px;
     }
 
     .doc-card {
       width: 100%;
-    }
-
-    .doc-card :host ::ng-deep .card-content {
-      padding: 1.5rem;
     }
 
     .section-intro {
@@ -512,17 +462,7 @@ src/
       overflow-x: auto;
       font-size: 0.875rem;
       line-height: 1.6;
-    }
-
-    .code-example {
-      background: #1a1a2e;
-      color: #a5d6ff;
-      padding: 1rem 1.5rem;
-      border-radius: 8px;
-      overflow-x: auto;
-      font-size: 0.875rem;
-      line-height: 1.6;
-      margin: 1rem 0;
+      white-space: pre;
     }
 
     .file-structure {
@@ -533,6 +473,7 @@ src/
       font-size: 0.875rem;
       line-height: 1.6;
       margin: 1rem 0;
+      white-space: pre;
     }
 
     .component-categories {
@@ -615,6 +556,36 @@ src/
       height: 20px;
     }
 
+    .resources-list {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .resources-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .resources-list mat-icon {
+      color: #1976d2;
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+    }
+
+    .resources-list a {
+      color: #1976d2;
+      text-decoration: none;
+    }
+
+    .resources-list a:hover {
+      text-decoration: underline;
+    }
+
     .docs-footer {
       background: #1a1a2e;
       color: white;
@@ -627,17 +598,77 @@ src/
       margin: 0;
       opacity: 0.8;
     }
+
+    @media (max-width: 768px) {
+      .docs-page {
+        flex-direction: column;
+      }
+
+      .doc-section {
+        padding: 1rem;
+      }
+
+      .docs-header h1 {
+        font-size: 1.75rem;
+      }
+
+      .description {
+        font-size: 1rem;
+      }
+    }
   `]
 })
-export class DocsComponent {
-  navItems: MenuItem[] = [
-    { label: 'Overview', icon: 'info', command: () => document.getElementById('overview')?.scrollIntoView({ behavior: 'smooth' }) },
-    { label: 'Tech Stack', icon: 'stack', command: () => document.getElementById('tech-stack')?.scrollIntoView({ behavior: 'smooth' }) },
-    { label: 'Structure', icon: 'folder', command: () => document.getElementById('structure')?.scrollIntoView({ behavior: 'smooth' }) },
-    { label: 'Components', icon: 'extension', command: () => document.getElementById('components')?.scrollIntoView({ behavior: 'smooth' }) },
-    { label: 'Patterns', icon: 'pattern', command: () => document.getElementById('patterns')?.scrollIntoView({ behavior: 'smooth' }) },
-    { label: 'Theming', icon: 'palette', command: () => document.getElementById('theming')?.scrollIntoView({ behavior: 'smooth' }) },
-    { label: 'Scripts', icon: 'code', command: () => document.getElementById('scripts')?.scrollIntoView({ behavior: 'smooth' }) },
-    { label: 'Browser Support', icon: 'browser', command: () => document.getElementById('browser-support')?.scrollIntoView({ behavior: 'smooth' }) },
-  ];
+export class DocsComponent implements AfterViewInit {
+  @ViewChildren('sectionRef') sections!: QueryList<ElementRef<HTMLElement>>;
+
+  navItems = signal<DocsNavItem[]>([
+    { id: 'overview', label: 'Overview', icon: 'info' },
+    { id: 'tech-stack', label: 'Tech Stack', icon: 'stack' },
+    { id: 'structure', label: 'Structure', icon: 'folder' },
+    { id: 'components', label: 'Components', icon: 'extension' },
+    { id: 'patterns', label: 'Patterns', icon: 'pattern' },
+    { id: 'theming', label: 'Theming', icon: 'palette' },
+    { id: 'scripts', label: 'Scripts', icon: 'code' },
+    { id: 'browser-support', label: 'Browser Support', icon: 'browser' },
+    { id: 'resources', label: 'Resources', icon: 'link' },
+  ]);
+
+  activeSection = signal<string>('overview');
+  sidebarCollapsed = signal<boolean>(false);
+
+  private observer: IntersectionObserver | null = null;
+
+  ngAfterViewInit(): void {
+    this.setupIntersectionObserver();
+  }
+
+  private setupIntersectionObserver(): void {
+    const options = {
+      root: null,
+      rootMargin: '-20% 0px -70% 0px',
+      threshold: 0
+    };
+
+    this.observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          this.activeSection.set(entry.target.id);
+        }
+      });
+    }, options);
+
+    this.sections.forEach(section => {
+      if (section.nativeElement) {
+        this.observer?.observe(section.nativeElement);
+      }
+    });
+  }
+
+  scrollToSection(id: string): void {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      this.activeSection.set(id);
+    }
+  }
 }
