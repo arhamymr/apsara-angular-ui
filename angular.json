@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "petaloker": {
+    "angular-dev-starter": {
       "projectType": "application",
       "schematics": {},
       "root": "",

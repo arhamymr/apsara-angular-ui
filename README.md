@@ -1,59 +1,83 @@
-# Petaloker
+# Angular Starter Project
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.5.
+A modern Angular 21+ boilerplate with signals, standalone components, Material 3, and best practices for building scalable web applications.
 
-## Development server
+## Why This Starter
 
-To start a local development server, run:
+- Latest Angular 21.0.5 with signals and standalone components
+- OnPush change detection for performance
+- Angular Material 3 + Tailwind CSS integration
+- Vitest setup with examples
+- Feature-based architecture with lazy loading
+- Production-ready structure and patterns
+
+## Tech Stack
+
+- Angular 21.0.5
+- TypeScript 5.9.2
+- RxJS 7.8.0
+- Angular Material 21.0.6
+- Tailwind CSS 4.1.12
+- SCSS
+- Vitest 4.0.8
+- Angular CLI 21.0.5
+
+## Project Structure
+
+```
+src/
+├── app/
+│   ├── core/              # Singleton services, models, interceptors
+│   ├── features/          # Lazy-loaded feature modules
+│   ├── shared/            # Reusable components, pipes, directives, UI library
+│   ├── app.config.ts      # App configuration
+│   ├── app.routes.ts      # Route definitions
+│   └── app.ts             # Root component
+├── material-theme.scss    # Angular Material theming
+├── styles.css             # Global styles
+└── index.html             # Entry HTML
+```
+
+## Quick Start
 
 ```bash
+# Clone the repository
+git clone https://github.com/your-username/angular-starter-project.git
+cd angular-starter-project
+
+# Install dependencies
+npm install
+
+# Start development server
 ng serve
-```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
+# Build for production
 ng build
-```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
+# Run tests
 ng test
+
+# Run tests with coverage
+ng test --coverage
 ```
 
-## Running end-to-end tests
+## Key Patterns
 
-For end-to-end (e2e) testing, run:
+- **Signals** — Reactive state management with `signal()`, `computed()`
+- **Standalone Components** — No NgModules, fully standalone
+- **Modern Control Flow** — `@if`, `@for`, `@switch` syntax
+- **Lazy Loading** — All feature modules are lazy-loaded
+- **OnPush Change Detection** — Optimized change detection strategy
+- **Functional Interceptors** — HTTP interceptors as functions
+- **inject()** — Function-based dependency injection
 
-```bash
-ng e2e
-```
+## Scripts
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+- `ng serve` — Start development server
+- `ng build` — Build for production
+- `ng test` — Run unit tests
+- `ng test --coverage` — Run tests with coverage report
 
-## Additional Resources
+## License
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+MIT
