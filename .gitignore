@@ -8,6 +8,7 @@
 
 # apsara-ui CLI build output
 libs/*/dist/
+libs/*/node_modules/
 
 # Node
 /node_modules
