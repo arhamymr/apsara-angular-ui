@@ -1,6 +1,6 @@
 # apsara-angular-devkit
 
-A shadcn-style UI component library and CLI for Angular. Copy components directly into your project with full customization control.
+A customizable UI component library and CLI for Angular. Copy components directly into your project with full customization control.
 
 ## Overview
 
@@ -30,13 +30,13 @@ npx apsara-ui init
 cd my-project
 
 # Install dependencies
-npm install
+pnpm install
 
 # Add components
 npx apsara-ui add button input card
 
 # Start development server
-npm start
+pnpm start
 ```
 
 ---
@@ -311,10 +311,10 @@ The minimal boilerplate includes:
 cd libs/cli
 
 # Install dependencies
-npm install
+pnpm install
 
 # Build
-npm run build
+pnpm run build
 
 # Output: dist/main.js, dist/commands/*.js, dist/utils/*.js
 ```
@@ -326,10 +326,10 @@ npm run build
 cd libs/ui
 
 # Install dependencies
-npm install
+pnpm install
 
 # Build (generates dist/)
-npm run build
+pnpm run build
 
 # Output: dist/index.js, dist/index.d.ts
 ```
@@ -340,24 +340,24 @@ npm run build
 
 ```bash
 cd libs/ui
-npm publish
+pnpm publish
 ```
 
 **For CLI:**
 
 ```bash
 cd libs/cli
-npm publish
+pnpm publish
 ```
 
 ### Local Development
 
 ```bash
 # Install root dependencies
-npm install
+pnpm install
 
 # Build both packages
-npm run build
+pnpm run build
 
 # Test CLI locally
 node libs/cli/dist/main.js list
@@ -487,7 +487,7 @@ const componentDescriptions: Record<string, string> = {
 ### 5. Rebuild CLI
 
 ```bash
-cd libs/cli && npm run build
+cd libs/cli && pnpm run build
 ```
 
 ---
