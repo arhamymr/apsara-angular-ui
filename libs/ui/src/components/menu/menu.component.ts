@@ -1,18 +1,20 @@
 import { Component, input, output, inject, signal, TemplateRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CdkMenuModule, CdkMenuItem, CdkMenuTrigger } from '@angular/cdk/menu';
+import { ButtonComponent } from '../button';
 import { cn } from '../../lib/cn';
 
 @Component({
   selector: 'app-menu',
   standalone: true,
-  imports: [CommonModule, CdkMenuModule, CdkMenuTrigger, CdkMenuItem],
+  imports: [CommonModule, CdkMenuModule, CdkMenuTrigger, CdkMenuItem, ButtonComponent],
   template: `
     @if (trigger()) {
       <button
         [cdkMenuTriggerFor]="menu"
-        class="flex items-center gap-2 px-3 py-2 rounded-lg border border-gray-200
-               hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+        class="flex items-center gap-2 px-3 py-2 rounded-lg border border-[var(--border)]
+               hover:bg-[var(--accent)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]"
+        style="background-color: var(--card); color: var(--foreground)"
         (cdkMenuOpened)="onMenuOpen()"
         (cdkMenuClosed)="onMenuClose()">
         @if (icon()) {
@@ -26,16 +28,16 @@ import { cn } from '../../lib/cn';
     }
     <ng-template #menu>
       <div
-        class="py-1 bg-white rounded-lg shadow-lg border border-gray-200 min-w-[200px]"
+        class="py-1 rounded-lg shadow-lg border min-w-[200px]"
+        style="background-color: var(--card); border-color: var(--border)"
         cdkMenu>
         @for (item of items(); track item.label) {
           @if (item.divider) {
-            <div class="h-px bg-gray-200 my-1" role="separator"></div>
+            <div class="h-px my-1" role="separator" style="background-color: var(--border)"></div>
           } @else {
             <button
-              class="w-full flex items-center gap-3 px-3 py-2 text-sm text-gray-700
-                     hover:bg-gray-100 focus:outline-none focus-visible:bg-gray-100
-                     disabled:opacity-50 disabled:cursor-not-allowed"
+              class="w-full flex items-center gap-3 px-3 py-2 text-sm"
+              style="color: var(--foreground)"
               cdkMenuItem
               [cdkMenuItemDisabled]="item.disabled"
               (click)="onItemClick(item)">
@@ -44,7 +46,7 @@ import { cn } from '../../lib/cn';
               }
               <span>{{ item.label }}</span>
               @if (item.shortcut) {
-                <span class="ml-auto text-xs text-gray-400">{{ item.shortcut }}</span>
+                <span class="ml-auto text-xs" style="color: var(--dimmed)">{{ item.shortcut }}</span>
               }
             </button>
           }

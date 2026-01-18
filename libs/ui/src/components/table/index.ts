@@ -1,1 +1,1 @@
-export { TableComponent, TableHeaderDirective, TableCellDirective } from './table.component';
+export { TableComponent } from './table.component';

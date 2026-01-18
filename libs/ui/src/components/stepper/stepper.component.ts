@@ -1,12 +1,13 @@
 import { Component, input, output, signal, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CdkStepperModule, CdkStep } from '@angular/cdk/stepper';
+import { ButtonComponent } from '../button';
 import { cn } from '../../lib/cn';
 
 @Component({
   selector: 'app-stepper',
   standalone: true,
-  imports: [CommonModule, CdkStepperModule],
+  imports: [CommonModule, CdkStepperModule, ButtonComponent],
   template: `
     <div class="w-full">
       <div class="flex items-center justify-between mb-8">
@@ -14,25 +15,21 @@ import { cn } from '../../lib/cn';
           <div class="flex items-center">
             <div class="flex flex-col items-center">
               <div
-                class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium
-                       transition-colors"
-                [class.bg-primary]="getCurrentStep() >= $index"
-                [class.text-white]="getCurrentStep() >= $index"
-                [class.bg-gray-200]="getCurrentStep() < $index"
-                [class.text-gray-600]="getCurrentStep() < $index">
+                class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium"
+                [style.background-color]="getCurrentStep() >= $index ? 'var(--primary)' : 'var(--tertiary)'"
+                [style.color]="getCurrentStep() >= $index ? 'var(--primary-foreground)' : 'var(--dimmed)'">
                 @if (getCurrentStep() > $index) {
                   <i class="material-icons text-sm">check</i>
                 } @else {
                   {{ $index + 1 }}
                 }
               </div>
-              <span class="text-xs mt-1 text-gray-600">{{ step }}</span>
+              <span class="text-xs mt-1" style="color: var(--dimmed)">{{ step }}</span>
             </div>
             @if ($index < steps().length - 1) {
               <div
                 class="w-12 h-0.5 mx-2"
-                [class.bg-primary]="getCurrentStep() > $index"
-                [class.bg-gray-200]="getCurrentStep() <= $index"></div>
+                [style.background-color]="getCurrentStep() > $index ? 'var(--primary)' : 'var(--tertiary)'"></div>
             }
           </div>
         }
@@ -41,19 +38,16 @@ import { cn } from '../../lib/cn';
         <ng-content />
       </div>
       <div class="flex justify-between mt-6">
-        <button
-          class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg
-                 hover:bg-gray-200 disabled:opacity-50"
+        <app-button
+          variant="secondary"
           [disabled]="getCurrentStep() === 0"
-          (click)="onPrevious()">
+          (clicked)="onPrevious()">
           Previous
-        </button>
-        <button
-          class="px-4 py-2 text-sm font-medium text-white bg-primary rounded-lg
-                 hover:bg-primary/90"
-          (click)="onNext()">
+        </app-button>
+        <app-button
+          (clicked)="onNext()">
           {{ getCurrentStep() === steps().length - 1 ? 'Finish' : 'Next' }}
-        </button>
+        </app-button>
       </div>
     </div>
   `

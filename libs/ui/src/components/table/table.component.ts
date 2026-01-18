@@ -1,18 +1,6 @@
-import { Component, input, output, signal, ContentChildren, QueryList, AfterContentInit, Directive } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { cn } from '../../lib/cn';
-
-@Directive({
-  selector: '[appTableHeader]',
-  standalone: true
-})
-export class TableHeaderDirective {}
-
-@Directive({
-  selector: '[appTableCell]',
-  standalone: true
-})
-export class TableCellDirective {}
 
 @Component({
   selector: 'app-table',
@@ -23,13 +11,21 @@ export class TableCellDirective {}
       <table class="w-full text-sm">
         <thead class="bg-gray-50">
           <tr>
-            <ng-content select="[table-header]" />
+            <ng-content select="[table-header-1]" />
+            <ng-content select="[table-header-2]" />
+            <ng-content select="[table-header-3]" />
+            <ng-content select="[table-header-4]" />
+            <ng-content select="[table-header-5]" />
           </tr>
         </thead>
         <tbody class="divide-y divide-gray-200">
           @for (row of rows(); track $index) {
             <tr class="hover:bg-gray-50">
-              <ng-content select="[table-cell]" />
+              <td><ng-content select="[table-cell-1]" /></td>
+              <td><ng-content select="[table-cell-2]" /></td>
+              <td><ng-content select="[table-cell-3]" /></td>
+              <td><ng-content select="[table-cell-4]" /></td>
+              <td><ng-content select="[table-cell-5]" /></td>
             </tr>
           }
         </tbody>

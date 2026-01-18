@@ -1,6 +1,6 @@
 import { Component, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ButtonComponent, CardComponent, TabsComponent, TableComponent } from '@apsara/ui';
+import { ButtonComponent, CardComponent, TabsComponent, TableComponent, IconComponent } from '@apsara/ui';
 import { CodeSnippetComponent } from '../../shared/components/code-snippet/code-snippet.component';
 
 interface ButtonProp {
@@ -13,8 +13,12 @@ interface ButtonProp {
 @Component({
   selector: 'app-button-showcase',
   standalone: true,
-  imports: [CommonModule, ButtonComponent, CardComponent, TabsComponent, TableComponent, CodeSnippetComponent],
+  imports: [CommonModule, ButtonComponent, CardComponent, TabsComponent, TableComponent, IconComponent, CodeSnippetComponent],
   template: `
+    <div class="ai-review-banner">
+      <span class="ai-review-icon">⚠️</span>
+      <span class="ai-review-text">AI-Generated Component - Pending Review</span>
+    </div>
     <section id="button" class="mb-16 scroll-m-20">
       <div class="mb-6">
         <h2 class="text-2xl font-semibold text-foreground mb-2">Button</h2>
@@ -137,6 +141,60 @@ interface ButtonProp {
         </app-tabs>
       </app-card>
 
+      <app-card class="mt-6">
+        <app-tabs
+          [options]="previewCodeOptions"
+          [modelValue]="iconTab()"
+          (changed)="iconTab.set($event)">
+          @if (iconTab() === 'preview') {
+            <div class="p-6">
+              <div class="grid grid-cols-[repeat(auto-fit,minmax(160px,1fr))] gap-6">
+                <div class="flex flex-col gap-2">
+                  <span class="text-xs text-dimmed font-medium">Icon Left</span>
+                  <app-button label="Add" variant="primary">
+                    <app-icon name="add" />
+                  </app-button>
+                </div>
+                <div class="flex flex-col gap-2">
+                  <span class="text-xs text-dimmed font-medium">Icon Right</span>
+                  <app-button label="Next" variant="primary">
+                    <app-icon name="arrow_forward" />
+                  </app-button>
+                </div>
+                <div class="flex flex-col gap-2">
+                  <span class="text-xs text-dimmed font-medium">Icon Only</span>
+                  <app-button variant="primary">
+                    <app-icon name="add" />
+                  </app-button>
+                </div>
+                <div class="flex flex-col gap-2">
+                  <span class="text-xs text-dimmed font-medium">Loading</span>
+                  <app-button label="Saving..." variant="primary" [loading]="true">
+                    <app-icon name="save" />
+                  </app-button>
+                </div>
+                <div class="flex flex-col gap-2">
+                  <span class="text-xs text-dimmed font-medium">Secondary</span>
+                  <app-button label="Download" variant="secondary">
+                    <app-icon name="download" />
+                  </app-button>
+                </div>
+                <div class="flex flex-col gap-2">
+                  <span class="text-xs text-dimmed font-medium">Outline</span>
+                  <app-button label="Edit" variant="outline">
+                    <app-icon name="edit" />
+                  </app-button>
+                </div>
+              </div>
+            </div>
+          } @else {
+            <div class="p-6">
+              <app-code-snippet [code]="iconCode" language="html" />
+            </div>
+          }
+        </app-tabs>
+      </app-card>
+
       <div class="mt-6">
         <h3 class="text-lg font-semibold text-foreground mb-4">Usage</h3>
         <app-code-snippet [code]="buttonImportCode" language="typescript" />
@@ -165,7 +223,29 @@ interface ButtonProp {
         </app-table>
       </div>
     </section>
-  `
+  `,
+  styles: [`
+    .ai-review-banner {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 1.5rem;
+      background: #fef3c7;
+      border: 1px solid #f59e0b;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+    }
+
+    .ai-review-icon {
+      font-size: 1.25rem;
+    }
+
+    .ai-review-text {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #92400e;
+    }
+  `]
 })
 export class ButtonShowcaseComponent {
   previewCodeOptions = [
@@ -176,6 +256,7 @@ export class ButtonShowcaseComponent {
   variantsActiveTab = signal<string>('preview');
   sizesActiveTab = signal<string>('preview');
   statesActiveTab = signal<string>('preview');
+  iconTab = signal<string>('preview');
 
   buttonImportCode = `import { ButtonComponent } from '@apsara/ui/button';`;
 
@@ -204,6 +285,18 @@ export class ButtonShowcaseComponent {
 <app-button label="Disabled" [disabled]="true" />
 <app-button label="Loading" [loading]="true" />
 <app-button label="Block" [block]="true" />`;
+
+  iconCode = `<app-button label="Add" variant="primary">
+  <app-icon name="add" />
+</app-button>
+
+<app-button label="Next" variant="primary">
+  <app-icon name="arrow_forward" />
+</app-button>
+
+<app-button variant="primary">
+  <app-icon name="add" />
+</app-button>`;
 
   propsData = (): ButtonProp[] => [
     { name: 'label', type: 'string', default: "''", description: 'Button text content' },

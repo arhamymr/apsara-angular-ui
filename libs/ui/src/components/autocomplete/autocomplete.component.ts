@@ -1,16 +1,17 @@
 import { Component, input, output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ButtonComponent } from '../button';
 import { cn } from '../../lib/cn';
 
 @Component({
   selector: 'app-autocomplete',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ButtonComponent],
   template: `
     <div class="relative">
       <div class="relative">
         @if (leadingIcon()) {
-          <i class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">{{ leadingIcon() }}</i>
+          <i class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-sm" style="color: var(--dimmed)">{{ leadingIcon() }}</i>
         }
         <input
           type="text"
@@ -20,26 +21,24 @@ import { cn } from '../../lib/cn';
           (focus)="onFocus()"
           (blur)="onBlur()"
           (keydown)="onKeydown($event)"
-          class="w-full px-3 py-2 border border-gray-300 rounded-lg
-                 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500
-                 disabled:opacity-50 disabled:cursor-not-allowed"
+          class="w-full px-3 py-2 rounded-lg border"
+          style="background-color: var(--card); border-color: var(--border); color: var(--foreground)"
           [class.pl-10]="leadingIcon()"
           [disabled]="disabled()" />
         @if (loading()) {
-          <i class="material-icons absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm animate-spin">sync</i>
+          <i class="material-icons absolute right-3 top-1/2 -translate-y-1/2 text-sm animate-spin" style="color: var(--dimmed)">sync</i>
         }
       </div>
       @if (isOpen() && filteredOptions.length > 0) {
         <div
-          class="absolute z-50 w-full mt-1 py-1 bg-white rounded-lg shadow-lg border border-gray-200
-                 max-h-60 overflow-auto">
+          class="absolute z-50 w-full mt-1 py-1 rounded-lg shadow-lg border overflow-auto"
+          style="background-color: var(--card); border-color: var(--border); max-height: 240px">
           @for (option of filteredOptions; track option.value) {
             <button
               type="button"
-              class="w-full flex items-center gap-3 px-3 py-2 text-sm text-gray-900
-                     hover:bg-gray-100 focus:outline-none focus-visible:bg-gray-100
-                     disabled:opacity-50 disabled:cursor-not-allowed"
-              [class.bg-blue-50]="isOptionSelected(option)"
+              class="w-full flex items-center gap-3 px-3 py-2 text-sm"
+              style="color: var(--foreground)"
+              [style.background-color]="isOptionSelected(option) ? 'var(--accent)' : 'transparent'"
               [disabled]="option.disabled"
               (click)="onSelect(option)"
               (mouseenter)="onOptionHover(option)">

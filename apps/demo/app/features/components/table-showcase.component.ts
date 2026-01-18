@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TableComponent, TableHeaderDirective, TableCellDirective, ButtonComponent } from '@apsara/ui';
+import { TableComponent, ButtonComponent } from '@apsara/ui';
 import { CardComponent } from '@apsara/ui';
 import { CodeSnippetComponent } from '../../shared/components/code-snippet/code-snippet.component';
 import { tableShowcaseCode } from './table-showcase.code';
@@ -20,13 +20,15 @@ interface User {
   imports: [
     CommonModule,
     TableComponent,
-    TableHeaderDirective,
-    TableCellDirective,
     ButtonComponent,
     CardComponent,
     CodeSnippetComponent
   ],
   template: `
+    <div class="ai-review-banner">
+      <span class="ai-review-icon">⚠️</span>
+      <span class="ai-review-text">AI-Generated Component - Pending Review</span>
+    </div>
     <section id="table" class="mb-16 scroll-m-20">
       <div class="mb-6">
         <h2 class="text-2xl font-semibold text-foreground mb-2">Table</h2>
@@ -61,14 +63,14 @@ interface User {
 
           @if (basicTab() === 'preview') {
             <app-table [rows]="basicUsers()">
-              <th table-header class="px-4 py-3 text-left text-xs font-medium text-dimmed uppercase tracking-wider">Name</th>
-              <th table-header class="px-4 py-3 text-left text-xs font-medium text-dimmed uppercase tracking-wider">Email</th>
-              <th table-header class="px-4 py-3 text-left text-xs font-medium text-dimmed uppercase tracking-wider">Role</th>
+              <th table-header-1 class="px-4 py-3 text-left text-xs font-medium text-dimmed uppercase tracking-wider">Name</th>
+              <th table-header-2 class="px-4 py-3 text-left text-xs font-medium text-dimmed uppercase tracking-wider">Email</th>
+              <th table-header-3 class="px-4 py-3 text-left text-xs font-medium text-dimmed uppercase tracking-wider">Role</th>
 
               @for (user of basicUsers(); track user.id) {
-                <td table-cell class="px-4 py-4 whitespace-nowrap text-sm text-foreground">{{ user.name }}</td>
-                <td table-cell class="px-4 py-4 whitespace-nowrap text-sm text-dimmed">{{ user.email }}</td>
-                <td table-cell class="px-4 py-4 whitespace-nowrap text-sm text-dimmed">
+                <td table-cell-1 class="px-4 py-4 whitespace-nowrap text-sm text-foreground">{{ user.name }}</td>
+                <td table-cell-2 class="px-4 py-4 whitespace-nowrap text-sm text-dimmed">{{ user.email }}</td>
+                <td table-cell-3 class="px-4 py-4 whitespace-nowrap text-sm text-dimmed">
                   <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
                     [class.bg-primary/10]="user.role === 'Admin'"
                     [class.text-primary]="user.role === 'Admin'"
@@ -115,12 +117,12 @@ interface User {
 
           @if (actionsTab() === 'preview') {
             <app-table [rows]="usersWithActions()">
-              <th table-header class="px-4 py-3 text-left text-xs font-medium text-dimmed uppercase tracking-wider">User</th>
-              <th table-header class="px-4 py-3 text-left text-xs font-medium text-dimmed uppercase tracking-wider">Status</th>
-              <th table-header class="px-4 py-3 text-right text-xs font-medium text-dimmed uppercase tracking-wider">Actions</th>
+              <th table-header-1 class="px-4 py-3 text-left text-xs font-medium text-dimmed uppercase tracking-wider">User</th>
+              <th table-header-2 class="px-4 py-3 text-left text-xs font-medium text-dimmed uppercase tracking-wider">Status</th>
+              <th table-header-3 class="px-4 py-3 text-right text-xs font-medium text-dimmed uppercase tracking-wider">Actions</th>
 
               @for (user of usersWithActions(); track user.id) {
-                <td table-cell class="px-4 py-4 whitespace-nowrap">
+                <td table-cell-1 class="px-4 py-4">
                   <div class="flex items-center">
                     <div class="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
                       <span class="text-sm font-medium text-primary">{{ user.name.charAt(0) }}</span>
@@ -131,7 +133,7 @@ interface User {
                     </div>
                   </div>
                 </td>
-                <td table-cell class="px-4 py-4 whitespace-nowrap">
+                <td table="px-4-cell-2 class py-4 whitespace-nowrap">
                   <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
                     [class.bg-success/10]="user.status === 'Active'"
                     [class.text-success]="user.status === 'Active'"
@@ -142,7 +144,7 @@ interface User {
                     {{ user.status }}
                   </span>
                 </td>
-                <td table-cell class="px-4 py-4 whitespace-nowrap text-right text-sm font-medium">
+                <td table-cell-3 class="px-4 py-4 whitespace-nowrap text-right text-sm font-medium">
                   <div class="flex items-center justify-end gap-2">
                     <app-button label="Edit" size="sm" variant="plain" />
                     <app-button label="Delete" size="sm" variant="plain" />
@@ -184,20 +186,20 @@ interface User {
 
           @if (metricsTab() === 'preview') {
             <app-table [rows]="metrics()">
-              <th table-header class="px-4 py-3 text-left text-xs font-medium text-dimmed uppercase tracking-wider">Metric</th>
-              <th table-header class="px-4 py-3 text-left text-xs font-medium text-dimmed uppercase tracking-wider">Value</th>
-              <th table-header class="px-4 py-3 text-left text-xs font-medium text-dimmed uppercase tracking-wider">Change</th>
-              <th table-header class="px-4 py-3 text-left text-xs font-medium text-dimmed uppercase tracking-wider">Status</th>
+              <th table-header-1 class="px-4 py-3 text-left text-xs font-medium text-dimmed uppercase tracking-wider">Metric</th>
+              <th table-header-2 class="px-4 py-3 text-left text-xs font-medium text-dimmed uppercase tracking-wider">Value</th>
+              <th table-header-3 class="px-4 py-3 text-left text-xs font-medium text-dimmed uppercase tracking-wider">Change</th>
+              <th table-header-4 class="px-4 py-3 text-left text-xs font-medium text-dimmed uppercase tracking-wider">Status</th>
 
               @for (metric of metrics(); track metric.name) {
-                <td table-cell class="px-4 py-4 whitespace-nowrap text-sm font-medium text-foreground">{{ metric.name }}</td>
-                <td table-cell class="px-4 py-4 whitespace-nowrap text-sm text-foreground">{{ metric.value }}</td>
-                <td table-cell class="px-4 py-4 whitespace-nowrap text-sm"
+                <td table-cell-1 class="px-4 py-4 whitespace-nowrap text-sm font-medium text-foreground">{{ metric.name }}</td>
+                <td table-cell-2 class="px-4 py-4 whitespace-nowrap text-sm text-foreground">{{ metric.value }}</td>
+                <td table-cell-3 class="px-4 py-4 whitespace-nowrap text-sm"
                   [class.text-success]="metric.change.startsWith('+')"
                   [class.text-danger]="metric.change.startsWith('-')">
                   {{ metric.change }}
                 </td>
-                <td table-cell class="px-4 py-4 whitespace-nowrap">
+                <td table-cell-4 class="px-4 py-4 whitespace-nowrap">
                   <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
                     [class.bg-success/10]="metric.status === 'Good'"
                     [class.text-success]="metric.status === 'Good'"
@@ -244,18 +246,18 @@ interface User {
 
           @if (ordersTab() === 'preview') {
             <app-table [rows]="orders()">
-              <th table-header class="px-4 py-3 text-left text-xs font-medium text-dimmed uppercase tracking-wider">Order ID</th>
-              <th table-header class="px-4 py-3 text-left text-xs font-medium text-dimmed uppercase tracking-wider">Customer</th>
-              <th table-header class="px-4 py-3 text-left text-xs font-medium text-dimmed uppercase tracking-wider">Date</th>
-              <th table-header class="px-4 py-3 text-right text-xs font-medium text-dimmed uppercase tracking-wider">Amount</th>
-              <th table-header class="px-4 py-3 text-left text-xs font-medium text-dimmed uppercase tracking-wider">Status</th>
+              <th table-header-1 class="px-4 py-3 text-left text-xs font-medium text-dimmed uppercase tracking-wider">Order ID</th>
+              <th table-header-2 class="px-4 py-3 text-left text-xs font-medium text-dimmed uppercase tracking-wider">Customer</th>
+              <th table-header-3 class="px-4 py-3 text-left text-xs font-medium text-dimmed uppercase tracking-wider">Date</th>
+              <th table-header-4 class="px-4 py-3 text-right text-xs font-medium text-dimmed uppercase tracking-wider">Amount</th>
+              <th table-header-5 class="px-4 py-3 text-left text-xs font-medium text-dimmed uppercase tracking-wider">Status</th>
 
               @for (order of orders(); track order.id) {
-                <td table-cell class="px-4 py-4 whitespace-nowrap text-sm font-medium text-foreground">#{{ order.id }}</td>
-                <td table-cell class="px-4 py-4 whitespace-nowrap text-sm text-foreground">{{ order.customer }}</td>
-                <td table-cell class="px-4 py-4 whitespace-nowrap text-sm text-dimmed">{{ order.date }}</td>
-                <td table-cell class="px-4 py-4 whitespace-nowrap text-sm text-right font-medium text-foreground">{{ order.amount }}</td>
-                <td table-cell class="px-4 py-4 whitespace-nowrap">
+                <td table-cell-1 class="px-4 py-4 whitespace-nowrap text-sm font-medium text-foreground">#{{ order.id }}</td>
+                <td table-cell-2 class="px-4 py-4 whitespace-nowrap text-sm text-foreground">{{ order.customer }}</td>
+                <td table-cell-3 class="px-4 py-4 whitespace-nowrap text-sm text-dimmed">{{ order.date }}</td>
+                <td table-cell-4 class="px-4 py-4 whitespace-nowrap text-sm text-right font-medium text-foreground">{{ order.amount }}</td>
+                <td table-cell-5 class="px-4 py-4 whitespace-nowrap">
                   <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
                     [class.bg-success/10]="order.status === 'Delivered'"
                     [class.text-success]="order.status === 'Delivered'"
@@ -283,25 +285,25 @@ interface User {
       </div>
 
       <div class="mt-6">
-        <h3 class="text-lg font-semibold text-foreground mb-4">Directives</h3>
+        <h3 class="text-lg font-semibold text-foreground mb-4">Content Projection Selectors</h3>
         <table class="w-full border-collapse text-sm bg-card rounded-lg overflow-hidden shadow-sm">
           <thead>
             <tr>
-              <th class="text-left p-3 border-b border-border bg-tertiary font-semibold text-dimmed text-xs uppercase tracking-wide">Directive</th>
+              <th class="text-left p-3 border-b border-border bg-tertiary font-semibold text-dimmed text-xs uppercase tracking-wide">Element</th>
               <th class="text-left p-3 border-b border-border bg-tertiary font-semibold text-dimmed text-xs uppercase tracking-wide">Selector</th>
               <th class="text-left p-3 border-b border-border bg-tertiary font-semibold text-dimmed text-xs uppercase tracking-wide">Description</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td class="p-3 border-b border-border text-foreground"><code class="bg-tertiary px-1.5 py-0.5 rounded text-xs">TableHeaderDirective</code></td>
-              <td class="p-3 border-b border-border text-foreground"><code class="bg-tertiary px-1.5 py-0.5 rounded text-xs">[table-header]</code></td>
-              <td class="p-3 border-b border-border text-foreground">Marks content as table header cell</td>
+              <td class="p-3 border-b border-border text-foreground"><code class="bg-tertiary px-1.5 py-0.5 rounded text-xs">Header Cell</code></td>
+              <td class="p-3 border-b border-border text-foreground"><code class="bg-tertiary px-1.5 py-0.5 rounded text-xs">table-header-1</code> to <code class="bg-tertiary px-1.5 py-0.5 rounded text-xs">table-header-5</code></td>
+              <td class="p-3 border-b border-border text-foreground">Projected into header row cells (max 5)</td>
             </tr>
             <tr>
-              <td class="p-3 border-b border-border text-foreground"><code class="bg-tertiary px-1.5 py-0.5 rounded text-xs">TableCellDirective</code></td>
-              <td class="p-3 border-b border-border text-foreground"><code class="bg-tertiary px-1.5 py-0.5 rounded text-xs">[table-cell]</code></td>
-              <td class="p-3 border-b border-border text-foreground">Marks content as table cell, projected into each row</td>
+              <td class="p-3 border-b border-border text-foreground"><code class="bg-tertiary px-1.5 py-0.5 rounded text-xs">Body Cell</code></td>
+              <td class="p-3 border-b border-border text-foreground"><code class="bg-tertiary px-1.5 py-0.5 rounded text-xs">table-cell-1</code> to <code class="bg-tertiary px-1.5 py-0.5 rounded text-xs">table-cell-5</code></td>
+              <td class="p-3 border-b border-border text-foreground">Projected into each row's cells (max 5)</td>
             </tr>
           </tbody>
         </table>
@@ -329,7 +331,29 @@ interface User {
         </table>
       </div>
     </section>
-  `
+  `,
+  styles: [`
+    .ai-review-banner {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 1.5rem;
+      background: #fef3c7;
+      border: 1px solid #f59e0b;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+    }
+
+    .ai-review-icon {
+      font-size: 1.25rem;
+    }
+
+    .ai-review-text {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #92400e;
+    }
+  `]
 })
 export class TableShowcaseComponent {
   basicTab = signal<'preview' | 'code'>('preview');

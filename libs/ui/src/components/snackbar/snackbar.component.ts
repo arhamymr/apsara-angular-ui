@@ -1,16 +1,17 @@
 import { Component, input, output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ButtonComponent } from '../button';
 import { cn } from '../../lib/cn';
 
 @Component({
   selector: 'app-snackbar',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ButtonComponent],
   template: `
     @if (isOpen()) {
       <div
-        class="fixed bottom-4 right-4 z-50 flex items-center gap-3 px-4 py-3 rounded-lg shadow-lg
-               bg-white border border-gray-200 min-w-[300px] max-w-md"
+        class="fixed bottom-4 right-4 z-50 flex items-center gap-3 px-4 py-3 rounded-lg shadow-lg border min-w-[300px] max-w-md"
+        style="background-color: var(--card); border-color: var(--border)"
         role="alert"
         [attr.aria-live]="polite() ? 'polite' : 'assertive'">
         @if (icon()) {
@@ -18,26 +19,28 @@ import { cn } from '../../lib/cn';
         }
         <div class="flex-1">
           @if (title()) {
-            <p class="text-sm font-medium text-gray-900">{{ title() }}</p>
+            <p class="text-sm font-medium" style="color: var(--foreground)">{{ title() }}</p>
           }
           @if (message()) {
-            <p class="text-sm text-gray-600">{{ message() }}</p>
+            <p class="text-sm" style="color: var(--dimmed)">{{ message() }}</p>
           }
         </div>
         @if (showClose()) {
-          <button
-            class="p-1 rounded hover:bg-gray-100"
-            (click)="onClose()"
+          <app-button
+            variant="plain"
+            size="icon"
+            (clicked)="onClose()"
             aria-label="Dismiss">
-            <i class="material-icons text-sm">close</i>
-          </button>
+            <span slot="">close</span>
+          </app-button>
         }
         @if (action()) {
-          <button
-            class="px-3 py-1 text-sm font-medium text-blue-600 hover:bg-blue-50 rounded"
-            (click)="onAction()">
+          <app-button
+            variant="plain"
+            size="sm"
+            (clicked)="onAction()">
             {{ action() }}
-          </button>
+          </app-button>
         }
       </div>
     }

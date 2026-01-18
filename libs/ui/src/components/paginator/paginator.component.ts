@@ -1,38 +1,41 @@
 import { Component, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ButtonComponent } from '../button';
 import { cn } from '../../lib/cn';
 
 @Component({
   selector: 'app-paginator',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ButtonComponent],
   template: `
     <div
-      class="flex items-center justify-between px-4 py-3 bg-white border-t border-gray-200"
+      class="flex items-center justify-between px-4 py-3 border-t"
       [class]="cn('gap-4', className())">
       <div class="flex items-center gap-2">
-        <span class="text-sm text-gray-700">
+        <span class="text-sm" style="color: var(--dimmed)">
           {{ startItem() }}-{{ endItem() }} of {{ totalItems() }}
         </span>
       </div>
       <div class="flex items-center gap-2">
-        <button
-          class="p-2 rounded-lg border border-gray-200 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+        <app-button
+          variant="outline"
+          size="icon"
           [disabled]="isFirstPage()"
-          (click)="onPrevious()"
+          (clicked)="onPrevious()"
           aria-label="Previous page">
-          <i class="material-icons text-sm">chevron_left</i>
-        </button>
-        <span class="text-sm text-gray-700">
+          <span slot="">chevron_left</span>
+        </app-button>
+        <span class="text-sm" style="color: var(--dimmed)">
           Page {{ currentPage() }} of {{ totalPages() }}
         </span>
-        <button
-          class="p-2 rounded-lg border border-gray-200 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+        <app-button
+          variant="outline"
+          size="icon"
           [disabled]="isLastPage()"
-          (click)="onNext()"
+          (clicked)="onNext()"
           aria-label="Next page">
-          <i class="material-icons text-sm">chevron_right</i>
-        </button>
+          <span slot="">chevron_right</span>
+        </app-button>
       </div>
     </div>
   `

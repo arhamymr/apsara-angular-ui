@@ -1,18 +1,22 @@
 import { Routes } from '@angular/router';
 import { HomeComponent, DocsComponent } from './features';
 import { NotFoundComponent } from './features/home/not-found.component';
+import { ComponentsOverviewComponent } from './features/components/components-overview.component';
+import { ComponentDocLayoutComponent } from './features/components/component-doc-layout.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'docs', component: DocsComponent },
+  { path: 'components', component: ComponentsOverviewComponent },
   {
     path: 'components',
-    loadComponent: () => import('./features/components/components-layout.component')
-      .then(m => m.ComponentsLayoutComponent),
+    component: ComponentDocLayoutComponent,
     children: [
-      { path: '', redirectTo: 'button', pathMatch: 'full' },
-      { path: 'alert', loadComponent: () => import('./features/components/alert-showcase.component').then(m => m.AlertShowcaseComponent) },
       { path: 'button', loadComponent: () => import('./features/components/button-showcase.component').then(m => m.ButtonShowcaseComponent) },
+      { path: 'alert', loadComponent: () => import('./features/components/alert-showcase.component').then(m => m.AlertShowcaseComponent) },
+      { path: 'alert-action', loadComponent: () => import('./features/components/alert-showcase.component').then(m => m.AlertShowcaseComponent) },
+      { path: 'alert-description', loadComponent: () => import('./features/components/alert-showcase.component').then(m => m.AlertShowcaseComponent) },
+      { path: 'alert-title', loadComponent: () => import('./features/components/alert-showcase.component').then(m => m.AlertShowcaseComponent) },
       { path: 'card', loadComponent: () => import('./features/components/card-showcase.component').then(m => m.CardShowcaseComponent) },
       { path: 'input', loadComponent: () => import('./features/components/input-showcase.component').then(m => m.InputShowcaseComponent) },
       { path: 'tabs', loadComponent: () => import('./features/components/tabs-showcase.component').then(m => m.TabsShowcaseComponent) },

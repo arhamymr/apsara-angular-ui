@@ -104,15 +104,22 @@ const buttonVariants = cva(
       }
 
       @if (label()) {
-        <span class="label" [class.invisible]="loading()">{{ label() }}</span>
+        <span class="button-label" [class.invisible]="loading()">{{ label() }}</span>
       }
 
-      <ng-content select="[slot]" />
+      <ng-content />
     </button>
   `,
   styles: [`
     :host {
       display: inline-block;
+    }
+
+    button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
     }
 
     .button-spinner {
@@ -126,7 +133,7 @@ const buttonVariants = cva(
       fill: currentColor;
     }
 
-    .label.invisible {
+    .button-label.invisible {
       visibility: hidden;
     }
   `]

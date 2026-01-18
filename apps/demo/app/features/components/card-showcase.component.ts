@@ -9,6 +9,10 @@ import { CodeSnippetComponent } from '../../shared/components/code-snippet/code-
   standalone: true,
   imports: [CommonModule, CardComponent, ButtonComponent, CodeSnippetComponent],
   template: `
+    <div class="ai-review-banner">
+      <span class="ai-review-icon">⚠️</span>
+      <span class="ai-review-text">AI-Generated Component - Pending Review</span>
+    </div>
     <section id="card" class="mb-16 scroll-m-20">
       <div class="mb-6">
         <h2 class="text-2xl font-semibold text-foreground mb-2">Card</h2>
@@ -100,7 +104,29 @@ import { CodeSnippetComponent } from '../../shared/components/code-snippet/code-
         </table>
       </div>
     </section>
-  `
+  `,
+  styles: [`
+    .ai-review-banner {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 1.5rem;
+      background: #fef3c7;
+      border: 1px solid #f59e0b;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+    }
+
+    .ai-review-icon {
+      font-size: 1.25rem;
+    }
+
+    .ai-review-text {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #92400e;
+    }
+  `]
 })
 export class CardShowcaseComponent {
   cardImportCode = `import { CardComponent } from '@apsara/ui/card';`;

@@ -1,14 +1,15 @@
-import { Component, input, output, signal } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ButtonComponent } from '../button';
 import { cn } from '../../lib/cn';
 
 @Component({
   selector: 'app-toolbar',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ButtonComponent],
   template: `
     <header
-      class="flex items-center justify-between px-4 h-16 bg-white border-b border-gray-200"
+      class="flex items-center justify-between px-4 h-16 border-b"
       [class]="cn(
         dense() ? 'h-12' : 'h-16',
         colorClass(),
@@ -17,15 +18,16 @@ import { cn } from '../../lib/cn';
       [attr.role]="role()">
       <div class="flex items-center gap-4">
         @if (hasMenu()) {
-          <button
-            class="p-2 rounded-lg hover:bg-gray-100"
-            (click)="onMenuClick()"
+          <app-button
+            variant="plain"
+            size="icon"
+            (clicked)="onMenuClick()"
             aria-label="Toggle menu">
-            <i class="material-icons">menu</i>
-          </button>
+            <span slot="">menu</span>
+          </app-button>
         }
         @if (title()) {
-          <h1 class="text-lg font-semibold text-gray-900">{{ title() }}</h1>
+          <h1 class="text-lg font-semibold" [class]="titleColorClass()">{{ title() }}</h1>
         }
       </div>
       <div class="flex items-center gap-2">
@@ -45,9 +47,18 @@ export class ToolbarComponent {
 
   colorClass(): string {
     const colors: Record<string, string> = {
-      primary: 'bg-primary text-white',
-      surface: 'bg-white text-gray-900',
-      transparent: 'bg-transparent text-gray-900',
+      primary: 'bg-[var(--primary)] text-[var(--primary-foreground)]',
+      surface: 'bg-[var(--card)] text-[var(--foreground)] border-[var(--border)]',
+      transparent: 'bg-transparent text-[var(--foreground)]',
+    };
+    return colors[this.variant()] || colors['surface'];
+  }
+
+  titleColorClass(): string {
+    const colors: Record<string, string> = {
+      primary: 'text-[var(--primary-foreground)]',
+      surface: 'text-[var(--foreground)]',
+      transparent: 'text-[var(--foreground)]',
     };
     return colors[this.variant()] || colors['surface'];
   }

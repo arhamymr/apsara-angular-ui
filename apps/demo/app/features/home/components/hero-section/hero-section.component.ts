@@ -10,29 +10,29 @@ import { ButtonComponent } from '@apsara/ui';
     <section class="hero-section">
       <div class="hero-content">
         <div class="logo-badge">
-          <span>&lt;/&gt;</span>
+          <span>A</span>
         </div>
-        <h1 class="hero-title">Angular Dev Starter</h1>
+        <h1 class="hero-title">Apsara UI</h1>
         <p class="hero-subtitle">
-          A modern Angular boilerplate with reusable components,
-          Tailwind CSS, and best practices built-in. Jumpstart your next project!
+          A comprehensive Angular component library built with Angular Material.
+          Accessible, customizable, and performant UI components for modern web applications.
         </p>
         <div class="hero-actions">
           <app-button
-            label="Get Started"
-            (clicked)="navigateTo('/auth/register')" />
+            label="Browse Components"
+            (clicked)="navigateTo('/components')" />
           <app-button
             variant="outline"
-            label="Learn More"
-            (clicked)="navigateTo('/about')" />
+            label="Documentation"
+            (clicked)="navigateTo('/docs')" />
         </div>
       </div>
 
       <div class="tech-stack">
-        <span class="tech-badge">Angular v19+</span>
-        <span class="tech-badge">Tailwind CSS</span>
-        <span class="tech-badge">TypeScript</span>
+        <span class="tech-badge">Angular 19+</span>
+        <span class="tech-badge">Standalone</span>
         <span class="tech-badge">Signals</span>
+        <span class="tech-badge">Material</span>
       </div>
     </section>
   `,
@@ -58,7 +58,7 @@ import { ButtonComponent } from '@apsara/ui';
       align-items: center;
       justify-content: center;
       margin: 0 auto 24px;
-      font-size: 32px;
+      font-size: 40px;
       font-weight: bold;
     }
 

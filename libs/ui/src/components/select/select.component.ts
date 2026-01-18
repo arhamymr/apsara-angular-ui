@@ -1,6 +1,7 @@
 import { Component, input, output, signal, forwardRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
+import { ButtonComponent } from '../button';
 import { cn } from '../../lib/cn';
 
 export interface SelectOption {
@@ -14,20 +15,19 @@ export interface SelectOption {
 @Component({
   selector: 'app-select',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ButtonComponent],
   template: `
     <div class="relative">
       <button
         type="button"
-        class="w-full flex items-center justify-between px-3 py-2 border border-gray-300 rounded-lg
-               bg-white hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500
-               disabled:opacity-50 disabled:cursor-not-allowed"
+        class="w-full flex items-center justify-between px-3 py-2 rounded-lg border"
+        style="background-color: var(--card); border-color: var(--border); color: var(--foreground)"
         [disabled]="isDisabled()"
         (click)="onToggle()"
         [attr.aria-expanded]="isOpen()"
         [attr.aria-labelledby]="ariaLabelledBy()">
         @if (placeholder() && !selectedLabel()) {
-          <span class="text-gray-500">{{ placeholder() }}</span>
+          <span style="color: var(--dimmed)">{{ placeholder() }}</span>
         }
         @if (selectedLabel()) {
           <span>{{ selectedLabel() }}</span>
@@ -36,18 +36,16 @@ export interface SelectOption {
       </button>
       @if (isOpen()) {
         <div
-          class="absolute z-50 w-full mt-1 py-1 bg-white rounded-lg shadow-lg border border-gray-200
-                 max-h-60 overflow-auto"
+          class="absolute z-50 w-full mt-1 py-1 rounded-lg shadow-lg border overflow-auto"
+          style="background-color: var(--card); border-color: var(--border); max-height: 240px"
           role="listbox"
           [attr.aria-label]="ariaLabel()">
           @for (option of filteredOptions; track option.value) {
             <button
               type="button"
-              class="w-full flex items-center gap-3 px-3 py-2 text-sm text-gray-900
-                     hover:bg-gray-100 focus:outline-none focus-visible:bg-gray-100
-                     disabled:opacity-50 disabled:cursor-not-allowed"
-              [class.bg-blue-50]="modelValue() === option.value"
-              [class.text-blue-600]="modelValue() === option.value"
+              class="w-full flex items-center gap-3 px-3 py-2 text-sm"
+              style="color: var(--foreground)"
+              [style.background-color]="modelValue() === option.value ? 'var(--accent)' : 'transparent'"
               [disabled]="option.disabled"
               role="option"
               [attr.aria-selected]="modelValue() === option.value"
@@ -62,7 +60,7 @@ export interface SelectOption {
             </button>
           }
           @if (filteredOptions.length === 0) {
-            <div class="px-3 py-2 text-sm text-gray-500">{{ noResultsText() }}</div>
+            <div class="px-3 py-2 text-sm" style="color: var(--dimmed)">{{ noResultsText() }}</div>
           }
         </div>
       }

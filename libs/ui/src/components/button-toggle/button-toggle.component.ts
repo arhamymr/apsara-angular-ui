@@ -8,20 +8,19 @@ import { cn } from '../../lib/cn';
   imports: [CommonModule],
   template: `
     <div
-      class="inline-flex items-center p-1 bg-gray-100 rounded-lg"
+      class="inline-flex items-center p-1 rounded-lg"
+      style="background-color: var(--tertiary)"
       role="group"
       [attr.aria-label]="ariaLabel()">
       @for (option of options(); track option.value) {
         <button
           type="button"
           class="px-3 py-1.5 text-sm font-medium rounded-md transition-all
-                 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500
+                 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]
                  disabled:opacity-50 disabled:cursor-not-allowed"
-          [class.bg-white]="modelValue() === option.value"
-          [class.shadow-sm]="modelValue() === option.value"
-          [class.text-gray-900]="modelValue() === option.value"
-          [class.text-gray-600]="modelValue() !== option.value"
-          [class.bg-transparent]="modelValue() !== option.value"
+          [style.background-color]="modelValue() === option.value ? 'var(--card)' : 'transparent'"
+          [style.box-shadow]="modelValue() === option.value ? 'var(--shadow-sm)' : 'none'"
+          [style.color]="modelValue() === option.value ? 'var(--foreground)' : 'var(--dimmed)'"
           [disabled]="option.disabled"
           (click)="onSelect(option.value)">
           @if (option.icon) {
