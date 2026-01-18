@@ -17,7 +17,11 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "experimentalDecorators": true,
-    "useDefineForClassFields": false
+    "useDefineForClassFields": false,
+    "baseUrl": ".",
+    "paths": {
+      "class-variance-authority": ["../node_modules/class-variance-authority"]
+    }
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules", "dist"]

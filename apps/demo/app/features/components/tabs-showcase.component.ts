@@ -22,11 +22,13 @@ import { InputComponent } from '@apsara/ui';
     InputComponent
   ],
   template: `
-    <div class="tabs-demo-container" id="tabs">
-      <h2>Tabs Component Demo</h2>
-      <p>Account settings form using tabs pattern</p>
+    <div id="tabs" class="p-6">
+      <div class="mb-6">
+        <h2 class="text-2xl font-semibold text-foreground mb-2">Tabs Component Demo</h2>
+        <p class="text-dimmed">Account settings form using tabs pattern</p>
+      </div>
       
-      <app-tabs [defaultValue]="'account'" className="lg:w-6/12 w-full">
+      <app-tabs [defaultValue]="'account'" class="lg:w-6/12 w-full">
         <app-tabs-list [value]="'account'">
           <app-tabs-item [value]="'account'">Account</app-tabs-item>
           <app-tabs-item [value]="'password'">Password</app-tabs-item>
@@ -88,23 +90,7 @@ import { InputComponent } from '@apsara/ui';
         </app-tabs-panel>
       </app-tabs>
     </div>
-  `,
-  styles: [`
-    .tabs-demo-container {
-      padding: 24px;
-    }
-    
-    .tabs-demo-container h2 {
-      font-size: 24px;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-    
-    .tabs-demo-container p {
-      color: #6b7280;
-      margin-bottom: 24px;
-    }
-  `]
+  `
 })
 export class TabsShowcaseComponent {
   accountForm = {

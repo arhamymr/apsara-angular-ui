@@ -12,56 +12,58 @@ interface DocSection {
   standalone: true,
   imports: [NgOptimizedImage],
   template: `
-    <div class="docs-layout">
-      <aside class="docs-sidebar">
-        <div class="sidebar-header">
+    <div class="flex min-h-[calc(100vh-64px)]">
+      <aside class="w-[280px] bg-secondary border-r border-border flex flex-col sticky top-16 h-[calc(100vh-64px)] overflow-y-auto">
+        <div class="p-6 border-b border-border flex items-center gap-3">
           <img
             ngSrc="https://assets.apsaradigital.com/logo-angular.png"
             width="100"
             height="24"
             alt="Apsara Logo">
-          <span class="version-badge">v1.0.0</span>
+          <span class="bg-primary/10 text-primary text-xs font-semibold px-2 py-0.5 rounded">v1.0.0</span>
         </div>
 
-        <nav class="sidebar-nav">
+        <nav class="flex-1 p-4 flex flex-col gap-1">
           @for (section of sections; track section.id) {
             <button
-              class="nav-item"
-              [class.active]="activeSection() === section.id"
+              class="flex items-center gap-3 px-3 py-2.5 rounded-lg border-none bg-transparent cursor-pointer text-left transition-all duration-200 text-dimmed text-sm font-medium"
+              [class.bg-primary]="activeSection() === section.id"
+              [class.text-white]="activeSection() === section.id"
+              [class.hover:bg-accent]="activeSection() !== section.id"
               (click)="setActiveSection(section.id)">
-              <span class="nav-icon">{{ section.icon }}</span>
-              <span class="nav-text">{{ section.title }}</span>
+              <span class="text-lg w-6 text-center">{{ section.icon }}</span>
+              <span>{{ section.title }}</span>
             </button>
           }
         </nav>
 
-        <div class="sidebar-footer">
-          <a href="https://github.com/apsaradigital" target="_blank" class="footer-link">
+        <div class="p-6 border-t border-border flex flex-col gap-2">
+          <a href="https://github.com/apsaradigital" target="_blank" class="text-dimmed text-xs hover:text-primary transition-colors no-underline">
             GitHub
           </a>
-          <a href="https://angular.dev" target="_blank" class="footer-link">
+          <a href="https://angular.dev" target="_blank" class="text-dimmed text-xs hover:text-primary transition-colors no-underline">
             Angular Docs
           </a>
         </div>
       </aside>
 
-      <main class="docs-content">
+      <main class="flex-1 p-12 max-w-[800px]">
         @switch (activeSection()) {
           @case ('getting-started') {
-            <section class="doc-section">
-              <h1>Getting Started</h1>
-              <p class="lead">Learn how to install and configure Apsara Angular DevKit in your project.</p>
+            <section class="mb-16 scroll-m-20">
+              <h1 class="text-[32px] font-bold text-foreground mb-2 pb-4 border-b border-border">Getting Started</h1>
+              <p class="text-lg text-dimmed my-4 leading-relaxed">Learn how to install and configure Apsara Angular DevKit in your project.</p>
 
-              <div class="info-box">
+              <div class="bg-primary/10 border-l-4 border-primary p-5 rounded-r-lg my-6 text-primary">
                 <strong>Prerequisites:</strong> Angular 17+ and Node.js 18+
               </div>
 
-              <h2>Installation</h2>
-              <pre class="code-block"><code>npm install @apsaradigital/angular-devkit</code></pre>
+              <h2 class="text-2xl font-semibold text-foreground mt-10 mb-4">Installation</h2>
+              <pre class="bg-tertiary text-foreground p-5 rounded-lg overflow-x-auto text-sm leading-relaxed my-4"><code>npm install @apsaradigital/angular-devkit</code></pre>
 
-              <h2>Quick Start</h2>
-              <p>Import the module in your application:</p>
-              <pre class="code-block"><code>import {{ '{' }} provideApsara {{ '}' }} from '@apsaradigital/angular-devkit';
+              <h2 class="text-2xl font-semibold text-foreground mt-10 mb-4">Quick Start</h2>
+              <p class="text-dimmed my-4 leading-relaxed">Import the module in your application:</p>
+              <pre class="bg-tertiary text-foreground p-5 rounded-lg overflow-x-auto text-sm leading-relaxed my-4"><code>import {{ '{' }} provideApsara {{ '}' }} from '@apsaradigital/angular-devkit';
 
 @NgModule({{ '{' }}
   imports: [/* ... */],
@@ -69,9 +71,9 @@ interface DocSection {
 {{ '}' }})
 export class AppModule {{ '{' }} {{ '}' }}</code></pre>
 
-              <h2>Configuration</h2>
-              <p>Create an <code>apsara.config.ts</code> file in your project root:</p>
-              <pre class="code-block"><code>import {{ '{' }} defineConfig {{ '}' }} from '@apsaradigital/angular-devkit';
+              <h2 class="text-2xl font-semibold text-foreground mt-10 mb-4">Configuration</h2>
+              <p class="text-dimmed my-4 leading-relaxed">Create an <code class="bg-tertiary px-1.5 py-0.5 rounded text-sm">apsara.config.ts</code> file in your project root:</p>
+              <pre class="bg-tertiary text-foreground p-5 rounded-lg overflow-x-auto text-sm leading-relaxed my-4"><code>import {{ '{' }} defineConfig {{ '}' }} from '@apsaradigital/angular-devkit';
 
 export default defineConfig({{ '{' }}
   theme: 'light',
@@ -83,69 +85,69 @@ export default defineConfig({{ '{' }}
           }
 
           @case ('components') {
-            <section class="doc-section">
-              <h1>Components</h1>
-              <p class="lead">Apsara provides a set of reusable UI components built with Angular.</p>
+            <section class="mb-16 scroll-m-20">
+              <h1 class="text-[32px] font-bold text-foreground mb-2 pb-4 border-b border-border">Components</h1>
+              <p class="text-lg text-dimmed my-4 leading-relaxed">Apsara provides a set of reusable UI components built with Angular.</p>
 
-              <h2>Button</h2>
-              <p>The Button component supports multiple variants and sizes.</p>
-              <pre class="code-block"><code>import {{ '{' }} ButtonComponent {{ '}' }} from '@apsara/ui';</code></pre>
+              <h2 class="text-2xl font-semibold text-foreground mt-10 mb-4">Button</h2>
+              <p class="text-dimmed my-4 leading-relaxed">The Button component supports multiple variants and sizes.</p>
+              <pre class="bg-tertiary text-foreground p-5 rounded-lg overflow-x-auto text-sm leading-relaxed my-4"><code>import {{ '{' }} ButtonComponent {{ '}' }} from '@apsara/ui';</code></pre>
 
-              <h3>Usage</h3>
-              <pre class="code-block"><code>&lt;button apsaraButton variant="primary" size="md"&gt;
+              <h3 class="text-lg font-semibold text-foreground mt-6 mb-3">Usage</h3>
+              <pre class="bg-tertiary text-foreground p-5 rounded-lg overflow-x-auto text-sm leading-relaxed my-4"><code>&lt;button apsaraButton variant="primary" size="md"&gt;
   Click me
 &lt;/button&gt;</code></pre>
 
-              <h3>Props</h3>
-              <table class="props-table">
+              <h3 class="text-lg font-semibold text-foreground mt-6 mb-3">Props</h3>
+              <table class="w-full border-collapse my-4 text-sm bg-card rounded-lg overflow-hidden shadow-sm">
                 <thead>
                   <tr>
-                    <th>Prop</th>
-                    <th>Type</th>
-                    <th>Default</th>
-                    <th>Description</th>
+                    <th class="text-left p-3 border-b border-border bg-tertiary font-semibold text-dimmed text-xs uppercase tracking-wide">Prop</th>
+                    <th class="text-left p-3 border-b border-border bg-tertiary font-semibold text-dimmed text-xs uppercase tracking-wide">Type</th>
+                    <th class="text-left p-3 border-b border-border bg-tertiary font-semibold text-dimmed text-xs uppercase tracking-wide">Default</th>
+                    <th class="text-left p-3 border-b border-border bg-tertiary font-semibold text-dimmed text-xs uppercase tracking-wide">Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><code>variant</code></td>
-                    <td>'primary' | 'secondary' | 'outline' | 'ghost'</td>
-                    <td>'primary'</td>
-                    <td>Visual style variant</td>
+                    <td class="p-3 border-b border-border text-foreground"><code class="bg-tertiary px-1.5 py-0.5 rounded text-xs">variant</code></td>
+                    <td class="p-3 border-b border-border text-foreground">'primary' | 'secondary' | 'outline' | 'ghost'</td>
+                    <td class="p-3 border-b border-border text-foreground">'primary'</td>
+                    <td class="p-3 border-b border-border text-foreground">Visual style variant</td>
                   </tr>
                   <tr>
-                    <td><code>size</code></td>
-                    <td>'sm' | 'md' | 'lg'</td>
-                    <td>'md'</td>
-                    <td>Button size</td>
+                    <td class="p-3 border-b border-border text-foreground"><code class="bg-tertiary px-1.5 py-0.5 rounded text-xs">size</code></td>
+                    <td class="p-3 border-b border-border text-foreground">'sm' | 'md' | 'lg'</td>
+                    <td class="p-3 border-b border-border text-foreground">'md'</td>
+                    <td class="p-3 border-b border-border text-foreground">Button size</td>
                   </tr>
                   <tr>
-                    <td><code>disabled</code></td>
-                    <td>boolean</td>
-                    <td>false</td>
-                    <td>Disable the button</td>
+                    <td class="p-3 border-b border-border text-foreground"><code class="bg-tertiary px-1.5 py-0.5 rounded text-xs">disabled</code></td>
+                    <td class="p-3 border-b border-border text-foreground">boolean</td>
+                    <td class="p-3 border-b border-border text-foreground">false</td>
+                    <td class="p-3 border-b border-border text-foreground">Disable the button</td>
                   </tr>
                 </tbody>
               </table>
 
-              <h2>Card</h2>
-              <p>Card components for displaying grouped content.</p>
-              <pre class="code-block"><code>import {{ '{' }} CardComponent {{ '}' }} from '@apsara/ui';</code></pre>
+              <h2 class="text-2xl font-semibold text-foreground mt-10 mb-4">Card</h2>
+              <p class="text-dimmed my-4 leading-relaxed">Card components for displaying grouped content.</p>
+              <pre class="bg-tertiary text-foreground p-5 rounded-lg overflow-x-auto text-sm leading-relaxed my-4"><code>import {{ '{' }} CardComponent {{ '}' }} from '@apsara/ui';</code></pre>
 
-              <h2>Input</h2>
-              <p>Form inputs with validation and styling.</p>
-              <pre class="code-block"><code>import {{ '{' }} InputComponent {{ '}' }} from '@apsara/ui';</code></pre>
+              <h2 class="text-2xl font-semibold text-foreground mt-10 mb-4">Input</h2>
+              <p class="text-dimmed my-4 leading-relaxed">Form inputs with validation and styling.</p>
+              <pre class="bg-tertiary text-foreground p-5 rounded-lg overflow-x-auto text-sm leading-relaxed my-4"><code>import {{ '{' }} InputComponent {{ '}' }} from '@apsara/ui';</code></pre>
             </section>
           }
 
           @case ('theming') {
-            <section class="doc-section">
-              <h1>Theming</h1>
-              <p class="lead">Customize the look and feel of your application with our theming system.</p>
+            <section class="mb-16 scroll-m-20">
+              <h1 class="text-[32px] font-bold text-foreground mb-2 pb-4 border-b border-border">Theming</h1>
+              <p class="text-lg text-dimmed my-4 leading-relaxed">Customize the look and feel of your application with our theming system.</p>
 
-              <h2>Light & Dark Mode</h2>
-              <p>Apsara supports both light and dark themes out of the box.</p>
-              <pre class="code-block"><code>import {{ '{' }} ThemeService {{ '}' }} from '@apsaradigital/core';
+              <h2 class="text-2xl font-semibold text-foreground mt-10 mb-4">Light &amp; Dark Mode</h2>
+              <p class="text-dimmed my-4 leading-relaxed">Apsara supports both light and dark themes out of the box.</p>
+              <pre class="bg-tertiary text-foreground p-5 rounded-lg overflow-x-auto text-sm leading-relaxed my-4"><code>import {{ '{' }} ThemeService {{ '}' }} from '@apsaradigital/core';
 
 // In your component
 constructor(private themeService: ThemeService) {{ '{' }} {{ '}' }}
@@ -154,9 +156,9 @@ toggleTheme() {{ '{' }}
   this.themeService.toggle();
 {{ '}' }}</code></pre>
 
-              <h2>Custom Colors</h2>
-              <p>Define custom colors in your global styles:</p>
-              <pre class="code-block"><code>:root {{ '{' }}
+              <h2 class="text-2xl font-semibold text-foreground mt-10 mb-4">Custom Colors</h2>
+              <p class="text-dimmed my-4 leading-relaxed">Define custom colors in your global styles:</p>
+              <pre class="bg-tertiary text-foreground p-5 rounded-lg overflow-x-auto text-sm leading-relaxed my-4"><code>:root {{ '{' }}
   --apsara-primary: #3b82f6;
   --apsara-secondary: #6366f1;
   --apsara-success: #22c55e;
@@ -164,30 +166,30 @@ toggleTheme() {{ '{' }}
   --apsara-error: #ef4444;
 {{ '}' }}</code></pre>
 
-              <h2>CSS Variables</h2>
-              <table class="props-table">
+              <h2 class="text-2xl font-semibold text-foreground mt-10 mb-4">CSS Variables</h2>
+              <table class="w-full border-collapse my-4 text-sm bg-card rounded-lg overflow-hidden shadow-sm">
                 <thead>
                   <tr>
-                    <th>Variable</th>
-                    <th>Description</th>
+                    <th class="text-left p-3 border-b border-border bg-tertiary font-semibold text-dimmed text-xs uppercase tracking-wide">Variable</th>
+                    <th class="text-left p-3 border-b border-border bg-tertiary font-semibold text-dimmed text-xs uppercase tracking-wide">Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><code>--apsara-primary</code></td>
-                    <td>Primary brand color</td>
+                    <td class="p-3 border-b border-border text-foreground"><code class="bg-tertiary px-1.5 py-0.5 rounded text-xs">--apsara-primary</code></td>
+                    <td class="p-3 border-b border-border text-foreground">Primary brand color</td>
                   </tr>
                   <tr>
-                    <td><code>--apsara-text</code></td>
-                    <td>Primary text color</td>
+                    <td class="p-3 border-b border-border text-foreground"><code class="bg-tertiary px-1.5 py-0.5 rounded text-xs">--apsara-text</code></td>
+                    <td class="p-3 border-b border-border text-foreground">Primary text color</td>
                   </tr>
                   <tr>
-                    <td><code>--apsara-bg</code></td>
-                    <td>Background color</td>
+                    <td class="p-3 border-b border-border text-foreground"><code class="bg-tertiary px-1.5 py-0.5 rounded text-xs">--apsara-bg</code></td>
+                    <td class="p-3 border-b border-border text-foreground">Background color</td>
                   </tr>
                   <tr>
-                    <td><code>--apsara-border</code></td>
-                    <td>Border color</td>
+                    <td class="p-3 border-b border-border text-foreground"><code class="bg-tertiary px-1.5 py-0.5 rounded text-xs">--apsara-border</code></td>
+                    <td class="p-3 border-b border-border text-foreground">Border color</td>
                   </tr>
                 </tbody>
               </table>
@@ -195,40 +197,40 @@ toggleTheme() {{ '{' }}
           }
 
           @case ('cli') {
-            <section class="doc-section">
-              <h1>CLI Commands</h1>
-              <p class="lead">Apsara CLI provides commands to streamline your development workflow.</p>
+            <section class="mb-16 scroll-m-20">
+              <h1 class="text-[32px] font-bold text-foreground mb-2 pb-4 border-b border-border">CLI Commands</h1>
+              <p class="text-lg text-dimmed my-4 leading-relaxed">Apsara CLI provides commands to streamline your development workflow.</p>
 
-              <h2>Initialize Project</h2>
-              <pre class="code-block"><code>apsara init my-project</code></pre>
+              <h2 class="text-2xl font-semibold text-foreground mt-10 mb-4">Initialize Project</h2>
+              <pre class="bg-tertiary text-foreground p-5 rounded-lg overflow-x-auto text-sm leading-relaxed my-4"><code>apsara init my-project</code></pre>
 
-              <h2>Add Component</h2>
-              <pre class="code-block"><code>apsara add component my-component</code></pre>
+              <h2 class="text-2xl font-semibold text-foreground mt-10 mb-4">Add Component</h2>
+              <pre class="bg-tertiary text-foreground p-5 rounded-lg overflow-x-auto text-sm leading-relaxed my-4"><code>apsara add component my-component</code></pre>
 
-              <h2>Available Commands</h2>
-              <table class="props-table">
+              <h2 class="text-2xl font-semibold text-foreground mt-10 mb-4">Available Commands</h2>
+              <table class="w-full border-collapse my-4 text-sm bg-card rounded-lg overflow-hidden shadow-sm">
                 <thead>
                   <tr>
-                    <th>Command</th>
-                    <th>Description</th>
+                    <th class="text-left p-3 border-b border-border bg-tertiary font-semibold text-dimmed text-xs uppercase tracking-wide">Command</th>
+                    <th class="text-left p-3 border-b border-border bg-tertiary font-semibold text-dimmed text-xs uppercase tracking-wide">Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><code>init [name]</code></td>
-                    <td>Initialize a new Apsara project</td>
+                    <td class="p-3 border-b border-border text-foreground"><code class="bg-tertiary px-1.5 py-0.5 rounded text-xs">init [name]</code></td>
+                    <td class="p-3 border-b border-border text-foreground">Initialize a new Apsara project</td>
                   </tr>
                   <tr>
-                    <td><code>add &lt;type&gt; [name]</code></td>
-                    <td>Add a new component, service, or feature</td>
+                    <td class="p-3 border-b border-border text-foreground"><code class="bg-tertiary px-1.5 py-0.5 rounded text-xs">add &lt;type&gt; [name]</code></td>
+                    <td class="p-3 border-b border-border text-foreground">Add a new component, service, or feature</td>
                   </tr>
                   <tr>
-                    <td><code>list</code></td>
-                    <td>List available templates</td>
+                    <td class="p-3 border-b border-border text-foreground"><code class="bg-tertiary px-1.5 py-0.5 rounded text-xs">list</code></td>
+                    <td class="p-3 border-b border-border text-foreground">List available templates</td>
                   </tr>
                   <tr>
-                    <td><code>--help</code></td>
-                    <td>Show help information</td>
+                    <td class="p-3 border-b border-border text-foreground"><code class="bg-tertiary px-1.5 py-0.5 rounded text-xs">--help</code></td>
+                    <td class="p-3 border-b border-border text-foreground">Show help information</td>
                   </tr>
                 </tbody>
               </table>
@@ -236,35 +238,35 @@ toggleTheme() {{ '{' }}
           }
 
           @case ('guides') {
-            <section class="doc-section">
-              <h1>Guides</h1>
-              <p class="lead">Step-by-step tutorials for common tasks.</p>
+            <section class="mb-16 scroll-m-20">
+              <h1 class="text-[32px] font-bold text-foreground mb-2 pb-4 border-b border-border">Guides</h1>
+              <p class="text-lg text-dimmed my-4 leading-relaxed">Step-by-step tutorials for common tasks.</p>
 
-              <h2>Creating a New Feature</h2>
-              <ol class="guide-steps">
-                <li>Use the CLI to generate a new feature: <pre><code>apsara add feature user-management</code></pre></li>
-                <li>The CLI creates the following structure:
-                  <pre class="code-block"><code>src/app/features/user-management/
+              <h2 class="text-2xl font-semibold text-foreground mt-10 mb-4">Creating a New Feature</h2>
+              <ol class="list-none p-0 my-4">
+                <li class="py-4 border-b border-border text-dimmed">Use the CLI to generate a new feature: <pre class="mt-3"><code>apsara add feature user-management</code></pre></li>
+                <li class="py-4 border-b border-border text-dimmed">The CLI creates the following structure:
+                  <pre class="bg-tertiary text-foreground p-5 rounded-lg overflow-x-auto text-sm leading-relaxed mt-3"><code>src/app/features/user-management/
 ├── components/
 ├── services/
 ├── user-management.routes.ts
 └── index.ts</code></pre>
                 </li>
-                <li>Add your components and services to the feature</li>
-                <li>Register routes in your app routes file</li>
+                <li class="py-4 border-b border-border text-dimmed">Add your components and services to the feature</li>
+                <li class="py-4 text-dimmed">Register routes in your app routes file</li>
               </ol>
 
-              <h2>Adding a New Component</h2>
-              <ol class="guide-steps">
-                <li>Run the component generator:
-                  <pre class="code-block"><code>apsara add component my-button</code></pre>
+              <h2 class="text-2xl font-semibold text-foreground mt-10 mb-4">Adding a New Component</h2>
+              <ol class="list-none p-0 my-4">
+                <li class="py-4 border-b border-border text-dimmed">Run the component generator:
+                  <pre class="bg-tertiary text-foreground p-5 rounded-lg overflow-x-auto text-sm leading-relaxed mt-3"><code>apsara add component my-button</code></pre>
                 </li>
-                <li>The component will be created with proper standalone configuration</li>
-                <li>Import and use it in your templates</li>
+                <li class="py-4 border-b border-border text-dimmed">The component will be created with proper standalone configuration</li>
+                <li class="py-4 text-dimmed">Import and use it in your templates</li>
               </ol>
 
-              <h2>Setting Up API Service</h2>
-              <pre class="code-block"><code>import {{ '{' }} inject {{ '}' }} from '@angular/core';
+              <h2 class="text-2xl font-semibold text-foreground mt-10 mb-4">Setting Up API Service</h2>
+              <pre class="bg-tertiary text-foreground p-5 rounded-lg overflow-x-auto text-sm leading-relaxed my-4"><code>import {{ '{' }} inject {{ '}' }} from '@angular/core';
 import {{ '{' }} ApiService {{ '}' }} from '@apsaradigital/core';
 
 @Component({{ '{' }})
@@ -277,51 +279,51 @@ export class UserComponent {{ '{' }}
           }
 
           @case ('resources') {
-            <section class="doc-section">
-              <h1>Resources</h1>
-              <p class="lead">Additional learning materials and references.</p>
+            <section class="mb-16 scroll-m-20">
+              <h1 class="text-[32px] font-bold text-foreground mb-2 pb-4 border-b border-border">Resources</h1>
+              <p class="text-lg text-dimmed my-4 leading-relaxed">Additional learning materials and references.</p>
 
-              <h2>Official Links</h2>
-              <ul class="resource-list">
-                <li>
-                  <strong>Angular Documentation</strong>
-                  <a href="https://angular.dev" target="_blank">angular.dev</a>
+              <h2 class="text-2xl font-semibold text-foreground mt-10 mb-4">Official Links</h2>
+              <ul class="list-none p-0 my-4">
+                <li class="p-4 bg-secondary rounded-lg mb-3 flex flex-col gap-1">
+                  <strong class="text-foreground">Angular Documentation</strong>
+                  <a href="https://angular.dev" target="_blank" class="text-primary no-underline text-sm hover:underline">angular.dev</a>
                 </li>
-                <li>
-                  <strong>Apsara GitHub</strong>
-                  <a href="https://github.com/apsaradigital" target="_blank">github.com/apsaradigital</a>
+                <li class="p-4 bg-secondary rounded-lg mb-3 flex flex-col gap-1">
+                  <strong class="text-foreground">Apsara GitHub</strong>
+                  <a href="https://github.com/apsaradigital" target="_blank" class="text-primary no-underline text-sm hover:underline">github.com/apsaradigital</a>
                 </li>
-                <li>
-                  <strong>Angular GitHub</strong>
-                  <a href="https://github.com/angular/angular" target="_blank">github.com/angular</a>
+                <li class="p-4 bg-secondary rounded-lg mb-3 flex flex-col gap-1">
+                  <strong class="text-foreground">Angular GitHub</strong>
+                  <a href="https://github.com/angular/angular" target="_blank" class="text-primary no-underline text-sm hover:underline">github.com/angular</a>
                 </li>
               </ul>
 
-              <h2>Learning Resources</h2>
-              <ul class="resource-list">
-                <li>
-                  <strong>Angular YouTube Channel</strong>
-                  <span>Official tutorials and updates</span>
+              <h2 class="text-2xl font-semibold text-foreground mt-10 mb-4">Learning Resources</h2>
+              <ul class="list-none p-0 my-4">
+                <li class="p-4 bg-secondary rounded-lg mb-3 flex flex-col gap-1">
+                  <strong class="text-foreground">Angular YouTube Channel</strong>
+                  <span class="text-dimmed text-sm">Official tutorials and updates</span>
                 </li>
-                <li>
-                  <strong>Angular Blog</strong>
-                  <span>Latest announcements and guides</span>
+                <li class="p-4 bg-secondary rounded-lg mb-3 flex flex-col gap-1">
+                  <strong class="text-foreground">Angular Blog</strong>
+                  <span class="text-dimmed text-sm">Latest announcements and guides</span>
                 </li>
-                <li>
-                  <strong>Angular Signals</strong>
-                  <a href="https://angular.dev/guide/signals" target="_blank">Learn about reactive state</a>
+                <li class="p-4 bg-secondary rounded-lg mb-3 flex flex-col gap-1">
+                  <strong class="text-foreground">Angular Signals</strong>
+                  <a href="https://angular.dev/guide/signals" target="_blank" class="text-primary no-underline text-sm hover:underline">Learn about reactive state</a>
                 </li>
               </ul>
 
-              <h2>Community</h2>
-              <ul class="resource-list">
-                <li>
-                  <strong>Discord</strong>
-                  <span>Join our community chat</span>
+              <h2 class="text-2xl font-semibold text-foreground mt-10 mb-4">Community</h2>
+              <ul class="list-none p-0 my-4">
+                <li class="p-4 bg-secondary rounded-lg mb-3 flex flex-col gap-1">
+                  <strong class="text-foreground">Discord</strong>
+                  <span class="text-dimmed text-sm">Join our community chat</span>
                 </li>
-                <li>
-                  <strong>Stack Overflow</strong>
-                  <span>Ask and answer questions</span>
+                <li class="p-4 bg-secondary rounded-lg mb-3 flex flex-col gap-1">
+                  <strong class="text-foreground">Stack Overflow</strong>
+                  <span class="text-dimmed text-sm">Ask and answer questions</span>
                 </li>
               </ul>
             </section>
@@ -329,262 +331,7 @@ export class UserComponent {{ '{' }}
         }
       </main>
     </div>
-  `,
-  styles: [`
-    .docs-layout {
-      display: flex;
-      min-height: calc(100vh - 64px);
-    }
-
-    .docs-sidebar {
-      width: 280px;
-      background: var(--color-bg-secondary);
-      border-right: 1px solid var(--color-border);
-      display: flex;
-      flex-direction: column;
-      position: sticky;
-      top: 64px;
-      height: calc(100vh - 64px);
-      overflow-y: auto;
-    }
-
-    .sidebar-header {
-      padding: 20px 24px;
-      border-bottom: 1px solid var(--color-border);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .version-badge {
-      background: var(--color-primary-light);
-      color: var(--color-primary);
-      font-size: 12px;
-      font-weight: 600;
-      padding: 4px 8px;
-      border-radius: 4px;
-    }
-
-    .sidebar-nav {
-      flex: 1;
-      padding: 16px 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .nav-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 10px 12px;
-      border: none;
-      background: transparent;
-      border-radius: 8px;
-      cursor: pointer;
-      text-align: left;
-      transition: all 0.2s;
-      color: var(--color-text-secondary);
-      font-size: 14px;
-      font-weight: 500;
-    }
-
-    .nav-item:hover {
-      background: var(--color-bg-hover);
-    }
-
-    .nav-item.active {
-      background: var(--color-primary);
-      color: white;
-    }
-
-    .nav-icon {
-      font-size: 18px;
-      width: 24px;
-      text-align: center;
-    }
-
-    .sidebar-footer {
-      padding: 16px 24px;
-      border-top: 1px solid var(--color-border);
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .footer-link {
-      color: var(--color-text-secondary);
-      text-decoration: none;
-      font-size: 13px;
-      transition: color 0.2s;
-    }
-
-    .footer-link:hover {
-      color: var(--color-primary);
-    }
-
-    .docs-content {
-      flex: 1;
-      padding: 48px 64px;
-      max-width: 800px;
-    }
-
-    .doc-section h1 {
-      font-size: 32px;
-      font-weight: 700;
-      color: var(--color-text-primary);
-      margin: 0 0 8px 0;
-      padding-bottom: 16px;
-      border-bottom: 1px solid var(--color-border);
-    }
-
-    .doc-section .lead {
-      font-size: 18px;
-      color: var(--color-text-secondary);
-      margin: 16px 0 32px 0;
-      line-height: 1.6;
-    }
-
-    .doc-section h2 {
-      font-size: 24px;
-      font-weight: 600;
-      color: var(--color-text-primary);
-      margin: 40px 0 16px 0;
-    }
-
-    .doc-section h3 {
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--color-text-primary);
-      margin: 24px 0 12px 0;
-    }
-
-    .doc-section p {
-      color: var(--color-text-secondary);
-      line-height: 1.7;
-      margin: 16px 0;
-    }
-
-    .doc-section code {
-      background: var(--color-bg-tertiary);
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-size: 14px;
-      color: var(--color-text-primary);
-    }
-
-    .info-box {
-      background: var(--color-primary-light);
-      border-left: 4px solid var(--color-primary);
-      padding: 16px 20px;
-      border-radius: 0 8px 8px 0;
-      margin: 24px 0;
-      color: var(--color-primary);
-    }
-
-    .code-block {
-      background: var(--color-bg-tertiary);
-      color: var(--color-text-primary);
-      padding: 20px;
-      border-radius: 8px;
-      overflow-x: auto;
-      font-size: 14px;
-      line-height: 1.6;
-      margin: 16px 0;
-    }
-
-    .code-block code {
-      background: transparent;
-      padding: 0;
-      color: inherit;
-    }
-
-    .props-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 16px 0;
-      font-size: 14px;
-      background: var(--color-bg-card);
-      border-radius: 8px;
-      overflow: hidden;
-    }
-
-    .props-table th,
-    .props-table td {
-      text-align: left;
-      padding: 12px 16px;
-      border-bottom: 1px solid var(--color-border);
-    }
-
-    .props-table th {
-      background: var(--color-bg-tertiary);
-      font-weight: 600;
-      color: var(--color-text-secondary);
-    }
-
-    .props-table td {
-      color: var(--color-text-primary);
-    }
-
-    .props-table code {
-      font-size: 13px;
-    }
-
-    .guide-steps {
-      list-style: none;
-      padding: 0;
-      margin: 16px 0;
-    }
-
-    .guide-steps li {
-      padding: 16px 0;
-      border-bottom: 1px solid var(--color-border);
-      color: var(--color-text-secondary);
-    }
-
-    .guide-steps li:last-child {
-      border-bottom: none;
-    }
-
-    .guide-steps pre {
-      margin: 12px 0 0 0;
-    }
-
-    .resource-list {
-      list-style: none;
-      padding: 0;
-      margin: 16px 0;
-    }
-
-    .resource-list li {
-      padding: 16px 20px;
-      background: var(--color-bg-secondary);
-      border-radius: 8px;
-      margin-bottom: 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .resource-list strong {
-      color: var(--color-text-primary);
-    }
-
-    .resource-list a {
-      color: var(--color-primary);
-      text-decoration: none;
-      font-size: 14px;
-    }
-
-    .resource-list a:hover {
-      text-decoration: underline;
-    }
-
-    .resource-list span {
-      color: var(--color-text-secondary);
-      font-size: 14px;
-    }
-  `]
+  `
 })
 export class DocsComponent {
   activeSection = signal<string>('getting-started');

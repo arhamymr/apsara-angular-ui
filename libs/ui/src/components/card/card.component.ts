@@ -17,7 +17,10 @@ import { cn } from '../../lib/cn';
         padding() === 'none' && 'p-0',
         padding() === 'small' && 'p-3',
         padding() === 'medium' && 'p-5',
-        padding() === 'large' && 'p-8'
+        padding() === 'large' && 'p-8',
+        align() === 'start' && 'text-start',
+        align() === 'center' && 'text-center',
+        align() === 'end' && 'text-end'
       )">
       <ng-content></ng-content>
     </div>
@@ -31,5 +34,6 @@ import { cn } from '../../lib/cn';
 export class CardComponent {
   readonly variant = input<'elevated' | 'outlined' | 'tonal'>('elevated');
   readonly padding = input<'none' | 'small' | 'medium' | 'large'>('medium');
+  readonly align = input<'start' | 'center' | 'end'>('start');
   cn = cn;
 }
