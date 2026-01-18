@@ -38,14 +38,15 @@ import { cn } from '../../lib/cn';
   `
 })
 export class ChipsComponent {
-  modelValue = signal<Array<{ value: string; label: string; disabled?: boolean }>>([]);
+  private _modelValue = signal<Array<{ value: string; label: string; disabled?: boolean }>>([]);
+  
+  modelValue = input<Array<{ value: string; label: string; disabled?: boolean }>>([]);
   placeholder = input<string>('Add a chip');
   addable = input<boolean>(false);
   changed = output<Array<{ value: string; label: string; disabled?: boolean }>>();
 
   onRemove(chip: { value: string; label: string; disabled?: boolean }): void {
     const updated = this.modelValue().filter(c => c.value !== chip.value);
-    this.modelValue.set(updated);
     this.changed.emit(updated);
   }
 
@@ -54,7 +55,6 @@ export class ChipsComponent {
     const value = target.value.trim();
     if (value && !this.modelValue().find(c => c.value === value)) {
       const updated = [...this.modelValue(), { value, label: value }];
-      this.modelValue.set(updated);
       this.changed.emit(updated);
       target.value = '';
     }

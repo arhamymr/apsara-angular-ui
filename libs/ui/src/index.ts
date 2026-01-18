@@ -12,6 +12,7 @@ export * from './components/radio';
 export * from './components/icon';
 export * from './components/toolbar';
 export * from './components/list';
+export { ListItemComponent } from './components/list/list-item.component';
 export * from './components/slide-toggle';
 export * from './components/button-toggle';
 export * from './components/paginator';

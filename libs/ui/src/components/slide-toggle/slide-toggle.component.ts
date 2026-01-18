@@ -1,4 +1,4 @@
-import { Component, input, output, signal } from '@angular/core';
+import { Component, input, output, signal, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { cn } from '../../lib/cn';
 
@@ -36,16 +36,23 @@ import { cn } from '../../lib/cn';
 })
 export class SlideToggleComponent {
   checked = input<boolean>(false);
-  isDisabled = signal(false);
+  private _isDisabled = signal(false);
   label = input<string>('');
   changed = output<boolean>();
+
+  get isDisabled() { return this._isDisabled; }
 
   isChecked(): boolean {
     return this.checked();
   }
 
+  @Input()
+  set disabled(value: boolean) {
+    this._isDisabled.set(value);
+  }
+
   onToggle(): void {
-    if (!this.isDisabled()) {
+    if (!this._isDisabled()) {
       const newValue = !this.checked();
       this.changed.emit(newValue);
     }

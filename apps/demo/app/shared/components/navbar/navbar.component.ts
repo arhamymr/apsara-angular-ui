@@ -9,14 +9,17 @@ import { ThemeService } from '../../../core/services';
   template: `
     <nav class="navbar">
       <div class="nav-content">
-        <a routerLink="/" class="logo-link">
-          <img
-            [ngSrc]="themeService.theme() === 'dark' ? 'https://assets.apsaradigital.com/logo-angular-white.png' : 'https://assets.apsaradigital.com/logo-angular.png'"
-            width="120"
-            height="30"
-            alt="Logo"
-            class="logo">
-        </a>
+        <div class="logo-section">
+          <a routerLink="/" class="logo-link">
+            <img
+              [ngSrc]="themeService.theme() === 'dark' ? 'https://assets.apsaradigital.com/logo-angular-white.png' : 'https://assets.apsaradigital.com/logo-angular.png'"
+              width="120"
+              height="30"
+              alt="Logo"
+              class="logo">
+          </a>
+          <span class="version-badge">v1.0.0</span>
+        </div>
 
         <div class="nav-links">
           <a routerLink="/components" routerLinkActive="active">Components</a>
@@ -35,17 +38,27 @@ import { ThemeService } from '../../../core/services';
   `,
   styles: [`
     .navbar {
-      background: var(--color-background);
-      border-bottom: 1px solid var(--color-border);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      background: var(--background);
+      border-bottom: 1px solid var(--border);
       padding: 0 1rem;
     }
     .nav-content {
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
       height: 64px;
+    }
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
     .logo-link {
       display: flex;
@@ -55,39 +68,47 @@ import { ThemeService } from '../../../core/services';
       height: 24px;
       width: auto;
     }
+    .version-badge {
+      background: oklch(0.55 0.2 250 / 0.1);
+      color: var(--primary);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: var(--radius-xs);
+    }
     .nav-links {
       display: flex;
       align-items: center;
       gap: 0.25rem;
     }
     .nav-links a {
-      color: var(--color-foreground);
+      color: var(--foreground);
       text-decoration: none;
       padding: 0.5rem 1rem;
-      border-radius: 6px;
+      border-radius: var(--radius);
       font-size: 14px;
       font-weight: 500;
       transition: background 0.2s;
     }
     .nav-links a:hover {
-      background: var(--color-muted);
+      background: var(--accent);
     }
     .nav-links a.active {
-      background: var(--color-muted);
+      background: var(--accent);
     }
     .theme-toggle {
-      background: var(--color-muted);
-      border: 1px solid var(--color-border);
-      color: var(--color-foreground);
+      background: var(--accent);
+      border: 1px solid var(--border);
+      color: var(--foreground);
       padding: 0.5rem 1rem;
-      border-radius: 6px;
+      border-radius: var(--radius);
       cursor: pointer;
       font-size: 14px;
       font-weight: 500;
       transition: background 0.2s;
     }
     .theme-toggle:hover {
-      background: var(--color-border);
+      background: var(--border);
     }
   `]
 })

@@ -1,1 +1,1 @@
-export { SortHeaderComponent } from './sort-header.component';
+export { SortHeaderComponent, type SortEvent } from './sort-header.component';

@@ -54,7 +54,7 @@ import { cn } from '../../lib/cn';
   `
 })
 export class MenuComponent {
-  items = input<Array<{ label: string; icon?: string; disabled?: boolean; divider?: boolean; shortcut?: string; value?: unknown }>>([]);
+  items = input<Array<{ label?: string; icon?: string; disabled?: boolean; divider?: boolean; shortcut?: string; value?: unknown }>>([]);
   label = input<string>('');
   icon = input<string>('');
   trigger = input<boolean>(true);
@@ -63,7 +63,7 @@ export class MenuComponent {
   onMenuOpen(): void {}
   onMenuClose(): void {}
 
-  onItemClick(item: { label: string; icon?: string; disabled?: boolean; divider?: boolean; shortcut?: string; value?: unknown }): void {
+  onItemClick(item: { label?: string; icon?: string; disabled?: boolean; divider?: boolean; shortcut?: string; value?: unknown }): void {
     if (!item.disabled && !item.divider) {
       this.itemClicked.emit(item.value ?? item.label);
     }

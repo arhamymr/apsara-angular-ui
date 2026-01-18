@@ -64,11 +64,11 @@ export type InputType = 'text' | 'email' | 'password' | 'number' | 'tel' | 'url'
     .label {
       font-size: 14px;
       font-weight: 500;
-      color: #374151;
+      color: var(--foreground);
     }
 
     .required {
-      color: #ef4444;
+      color: var(--danger);
     }
 
     .input-container {
@@ -81,26 +81,26 @@ export type InputType = 'text' | 'email' | 'password' | 'number' | 'tel' | 'url'
       width: 100%;
       padding: 10px 14px;
       font-size: 14px;
-      border: 1.5px solid #d1d5db;
-      border-radius: 8px;
-      background: white;
-      color: #1f2937;
+      border: 1.5px solid var(--input-border);
+      border-radius: var(--radius);
+      background: var(--input);
+      color: var(--foreground);
       transition: all 0.2s;
       box-sizing: border-box;
     }
 
     input::placeholder {
-      color: #9ca3af;
+      color: var(--dimmed);
     }
 
     input:focus {
       outline: none;
-      border-color: #1976d2;
-      box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.1);
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px oklch(0.55 0.2 250 / 0.1);
     }
 
     input:disabled {
-      background: #f3f4f6;
+      background: var(--muted);
       cursor: not-allowed;
       opacity: 0.6;
     }
@@ -120,7 +120,7 @@ export type InputType = 'text' | 'email' | 'password' | 'number' | 'tel' | 'url'
       justify-content: center;
       width: 36px;
       height: 36px;
-      color: #6b7280;
+      color: var(--dimmed);
       font-size: 18px;
     }
 
@@ -135,29 +135,29 @@ export type InputType = 'text' | 'email' | 'password' | 'number' | 'tel' | 'url'
       cursor: pointer;
       font-size: 12px;
       padding: 4px 8px;
-      border-radius: 4px;
+      border-radius: var(--radius-xs);
     }
 
     .icon.suffix:hover {
-      background: #f3f4f6;
+      background: var(--accent);
     }
 
     .error-text {
       font-size: 12px;
-      color: #ef4444;
+      color: var(--danger);
     }
 
     .hint {
       font-size: 12px;
-      color: #6b7280;
+      color: var(--dimmed);
     }
 
     .input-wrapper.error input {
-      border-color: #ef4444;
+      border-color: var(--danger);
     }
 
     .input-wrapper.error input:focus {
-      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+      box-shadow: 0 0 0 3px oklch(0.6098 0.244 28.41 / 0.1);
     }
 
     .input-wrapper.disabled {
@@ -195,7 +195,6 @@ export class InputComponent implements ControlValueAccessor {
   }
 
   setDisabledState(isDisabled: boolean): void {
-    // Handled via signal input
   }
 
   onInput(event: Event): void {
@@ -208,7 +207,6 @@ export class InputComponent implements ControlValueAccessor {
   }
 
   onFocus(): void {
-    // Optional: handle focus
   }
 
   onSuffixClick(): void {

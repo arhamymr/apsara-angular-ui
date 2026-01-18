@@ -16,22 +16,21 @@ interface SidebarCategory {
   standalone: true,
   imports: [RouterLink, RouterLinkActive],
   template: `
-    <aside class="h-full lg:pr-8 pb-10 max-lg:pb-20 outline-none base-ui-disable-scrollbar overflow-y-auto"
-           style="overflow: auto; --scroll-area-overflow-x-start: 0px; --scroll-area-overflow-x-end: 0px; --scroll-area-overflow-y-start: 0px; --scroll-area-overflow-y-end: 0px;">
-      <div class="pl-1" style="min-width: fit-content;">
+    <aside class="hidden lg:block sticky top-16 h-[calc(100vh-64px)] overflow-y-auto pr-8 pb-10 max-lg:pb-20 scrollbar-none">
+      <div class="pl-1 min-w-fit">
         <nav class="flex flex-col gap-4.5 py-9">
           @for (category of categories(); track category.name) {
-            <section class="flex flex-wrap gap-0.5 *:data-[slot=sidebar-list]:p-0">
-              <span class="inline-flex items-center text-sm font-medium text-dimmed **:[svg]:size-3.5">
+            <section class="flex flex-wrap gap-0.5">
+              <span class="inline-flex items-center text-sm font-medium text-[var(--dimmed)] [&>svg]:size-3.5">
                 {{ category.name }}
               </span>
-              <ul class="flex flex-col gap-0.5 w-full" data-slot="sidebar-list">
+              <ul class="flex flex-col gap-0.5 w-full list-none m-0 p-0">
                 @for (item of category.items; track item.route) {
-                  <li class="group/sidebar-item **:data-[slot=sidebar-submenu]:w-auto relative flex">
+                  <li class="group/sidebar-item relative flex m-0">
                     <a [routerLink]="item.route"
-                       routerLinkActive="active bg-accent"
+                       routerLinkActive="bg-[var(--accent)]"
                        [routerLinkActiveOptions]="{ exact: item.route === '/' }"
-                       class="flex items-center gap-2.5 w-full relative z-10 text-foreground cursor-pointer text-left transition-colors duration-75 hover:bg-accent **:[svg]:size-4 **:[svg]:text-muted focus-visible:outline-2 focus-visible:outline-offset-2 outline-primary data-popup-open:bg-accent">
+                       class="flex items-center gap-2.5 w-full relative z-10 text-[var(--foreground)] cursor-pointer text-left transition-colors duration-75 hover:bg-[var(--accent)] [&>svg]:size-4 [&>svg]:text-[var(--dimmed)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary)] rounded-[var(--radius)] p-2 text-sm decoration-0">
                       {{ item.label }}
                     </a>
                   </li>
@@ -48,62 +47,12 @@ interface SidebarCategory {
       display: block;
     }
 
-    aside {
-      position: sticky;
-      top: 64px;
-      height: calc(100vh - 64px);
+    .scrollbar-none {
+      scrollbar-width: none;
     }
 
-    nav {
-      min-width: fit-content;
-    }
-
-    ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-
-    li {
-      margin: 0;
-    }
-
-    a {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 12px;
-      text-decoration: none;
-      font-size: 14px;
-      color: var(--color-text-primary);
-      border-radius: 6px;
-      transition: background-color 0.15s ease;
-    }
-
-    a:hover {
-      background: var(--color-bg-hover);
-    }
-
-    a.active,
-    a.bg-accent {
-      background: var(--color-bg-hover);
-    }
-
-    a:focus-visible {
-      outline: 2px solid var(--color-primary);
-      outline-offset: 2px;
-    }
-
-    @media (max-width: 1024px) {
-      aside {
-        padding-bottom: 80px;
-      }
-    }
-
-    @media (max-width: 768px) {
-      aside {
-        display: none;
-      }
+    .scrollbar-none::-webkit-scrollbar {
+      display: none;
     }
   `]
 })
