@@ -17,7 +17,7 @@ import { CardComponent, ButtonComponent } from '@apsara/ui';
           <app-button label="Primary" variant="primary" />
           <app-button label="Secondary" variant="secondary" />
           <app-button label="Tertiary" variant="plain" />
-          <app-button label="Danger" variant="danger" />
+            <app-button label="Danger" variant="destructive" />
         </div>
         <div class="flex flex-wrap gap-2">
           <app-button label="Outline" variant="outline" />

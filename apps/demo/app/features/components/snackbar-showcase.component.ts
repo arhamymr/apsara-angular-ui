@@ -30,7 +30,7 @@ interface SnackbarProp {
             <div class="p-6">
               <div class="flex flex-wrap gap-3">
                 <app-button label="Show Success" (clicked)="showSnackbar('success')" />
-                <app-button label="Show Error" variant="danger" (clicked)="showSnackbar('error')" />
+                <app-button label="Show Error" variant="destructive" (clicked)="showSnackbar('error')" />
                 <app-button label="Show Info" variant="secondary" (clicked)="showSnackbar('info')" />
                 <app-button label="Show with Action" variant="plain" (clicked)="showSnackbar('action')" />
               </div>
@@ -104,7 +104,7 @@ export class SnackbarShowcaseComponent {
   (closed)="onClose()" />`;
 
   basicCode = `<app-button label="Show Success" (clicked)="showSnackbar('success')" />
-<app-button label="Show Error" variant="danger" (clicked)="showSnackbar('error')" />
+<app-button label="Show Error" variant="destructive" (clicked)="showSnackbar('error')" />
 <app-button label="Show Info" variant="secondary" (clicked)="showSnackbar('info')" />
 
 <app-snackbar

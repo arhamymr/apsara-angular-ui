@@ -4,36 +4,21 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../lib/cn';
 import { LucideAngularModule, LoaderCircle } from 'lucide-angular';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'destructive' | 'outline' | 'plain' | 'danger';
+export type ButtonVariant = 'primary' | 'secondary' | 'destructive' | 'outline' | 'plain';
 export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'icon';
 
 const buttonVariants = cva(
   [
-    'inline-flex items-center justify-center font-medium rounded-xl transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none',
+    'cursor-pointer inline-flex items-center justify-center font-medium rounded-xl transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none',
   ],
   {
     variants: {
       variant: {
-        primary: [
-          'bg-primary',
-          'ring ring-border inset-shadow-2xs inset-shadow-white/50',
-        ],
-        secondary: [
-          'bg-secondary text-secondary-foreground',
-          'ring ring-border inset-shadow-2xs inset-shadow-white/15',
-        ],
-        destructive: [
-          'bg-destructive text-destructive-foreground',
-           'ring ring-border inset-shadow-2xs inset-shadow-white/50',
-        ],
-        outline: [
-          'bg-transparent text-primary',
-          'ring-primary-border',
-        ],
-        plain: [
-          'bg-transparent text-primary',
-          'ring-0 shadow-none',
-        ],
+        primary: 'bg-primary ring ring-border inset-shadow-2xs inset-shadow-white/50',
+        secondary: 'bg-secondary text-secondary-foreground ring ring-border inset-shadow-2xs inset-shadow-white/15',
+        destructive: 'bg-destructive text-destructive-foreground ring ring-border inset-shadow-2xs inset-shadow-white/50',
+        outline: 'bg-transparent text-primary ring ring-primary-border',
+        plain: 'bg-transparent text-primary ring-0 shadow-none',
       },
       size: {
         'xs': 'h-7 px-2 text-xs *:[svg]:size-3',

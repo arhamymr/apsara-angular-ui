@@ -40,7 +40,7 @@ interface RippleProp {
                   <app-button label="Outline" variant="outline" />
                 </app-ripple>
                 <app-ripple>
-                  <app-button label="Danger" variant="danger" />
+                  <app-button label="Danger" variant="destructive" />
                 </app-ripple>
               </div>
             </div>

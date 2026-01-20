@@ -31,7 +31,7 @@ interface DialogProp {
               <div class="flex flex-wrap gap-3">
                 <app-button label="Open Simple Dialog" (clicked)="openDialog('simple')" />
                 <app-button label="Open Form Dialog" variant="secondary" (clicked)="openDialog('form')" />
-                <app-button label="Open Confirmation" variant="danger" (clicked)="openDialog('confirm')" />
+                  <app-button label="Open Confirmation" variant="destructive" (clicked)="openDialog('confirm')" />
               </div>
             </div>
           } @else {
@@ -90,7 +90,7 @@ interface DialogProp {
         </p>
         <div dialog-actions class="flex gap-3">
           <app-button label="Cancel" variant="plain" (clicked)="onDialogClose('confirm', { action: 'cancel' })" />
-          <app-button label="Delete" variant="danger" (clicked)="onDialogClose('confirm', { action: 'confirm' })" />
+            <app-button label="Delete" variant="destructive" (clicked)="onDialogClose('confirm', { action: 'confirm' })" />
         </div>
       </app-dialog>
 

@@ -32,7 +32,7 @@ interface ButtonProp {
                 <app-button label="Secondary" variant="secondary" />
               </div>
               <div class="flex flex-col gap-2 p-3">
-                <app-button label="Danger" variant="danger" />
+                <app-button label="Destructive" variant="destructive" />
               </div>
               <div class="flex flex-col gap-2 p-3">
                 <app-button label="Outline" variant="outline" />
@@ -166,7 +166,7 @@ export class ButtonShowcaseComponent {
 
   variantsCode = `<app-button label="Primary" variant="primary" />
  <app-button label="Secondary" variant="secondary" />
- <app-button label="Danger" variant="danger" />
+ <app-button label="Destructive" variant="destructive" />
  <app-button label="Outline" variant="outline" />
  <app-button label="Plain" variant="plain" />`;
 
@@ -174,12 +174,18 @@ export class ButtonShowcaseComponent {
 <app-button label="SM" size="sm" />
 <app-button label="MD" size="md" />
 <app-button label="LG" size="lg" />
-<app-button variant="primary">
+<app-button size="icon" variant="primary">
+  <lucide-angular [img]="Plus" />
+</app-button>`;
+
+  statesCode = `<app-button label="Default" />
+<app-button label="Disabled" [disabled]="true" />
+<app-button label="Loading" [loading]="true" />
+<app-button label="Block" [block]="true" />`;
+
+  iconsCode = `<app-button label="Add" variant="primary">
   <lucide-angular [img]="Plus" />
 </app-button>
-                <app-button size="icon" variant="primary">
-                  <lucide-angular [img]="Plus" />
-                </app-button>
 
 <app-button label="Next" variant="primary">
   <lucide-angular [img]="ArrowRight" />
@@ -191,7 +197,7 @@ export class ButtonShowcaseComponent {
 
   propsData = (): ButtonProp[] => [
     { name: 'label', type: 'string', description: 'Button text content' },
-    { name: 'variant', type: "'primary' | 'secondary' | 'destructive' | 'danger' | 'outline' | 'plain'", description: 'Visual style variant' },
+    { name: 'variant', type: "'primary' | 'secondary' | 'destructive' | 'outline' | 'plain'", description: 'Visual style variant' },
     { name: 'size', type: "'xs' | 'sm' | 'md' | 'lg' | 'icon'", description: 'Button size' },
     { name: 'disabled', type: 'boolean', description: 'Disables the button' },
     { name: 'loading', type: 'boolean', description: 'Shows loading spinner' },

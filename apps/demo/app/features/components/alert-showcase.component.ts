@@ -76,7 +76,7 @@ interface AlertProp {
                   <app-alert-title>Error</app-alert-title>
                   <app-alert-description>Message deleted successfully. This action cannot be undone.</app-alert-description>
                   <app-alert-action>
-                    <app-button label="Undo" variant="danger" size="sm" />
+                    <app-button label="Undo" variant="destructive" size="sm" />
                   </app-alert-action>
                 </app-alert>
               </div>
@@ -235,11 +235,11 @@ export class AlertShowcaseComponent {
   </app-alert-action>
 </app-alert>
 
-<app-alert variant="danger">
+  <app-alert variant="danger">
   <app-alert-title>Error</app-alert-title>
   <app-alert-description>Message deleted successfully.</app-alert-description>
   <app-alert-action>
-    <app-button label="Undo" variant="danger" size="sm" />
+    <app-button label="Undo" variant="destructive" size="sm" />
   </app-alert-action>
 </app-alert>
 
