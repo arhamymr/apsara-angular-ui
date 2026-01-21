@@ -9,19 +9,21 @@ import { ButtonComponent, BadgeComponent } from '@apsara/ui';
   template: `
     <section class="w-full px-6 py-20 text-center text-foreground border border-border rounded-xl mx-auto">
       <div class="w-full">
-        <h1 class="text-4xl md:text-5xl mb-4 leading-tight">Apsara Components UI</h1>
+        <h1 class="text-4xl md:text-5xl mb-4 leading-tight">Angular Components UI</h1>
         <p class="max-w-2xl mx-auto text-lg md:text-xl opacity-90 mb-8 leading-relaxed">
           A comprehensive Angular component library built with Angular Material.
           Accessible, customizable, and performant UI components for modern web applications.
         </p>
         <div class="flex flex-wrap justify-center gap-4">
           <app-button
-            label="Browse Components"
-            (clicked)="navigateTo('/components')" />
+            (clicked)="navigateTo('/components')">
+            Browse Components
+          </app-button>
           <app-button
             variant="outline"
-            label="Documentation"
-            (clicked)="navigateTo('/docs')" />
+            (clicked)="navigateTo('/docs')">
+            Documentation
+          </app-button>
         </div>
       </div>
 

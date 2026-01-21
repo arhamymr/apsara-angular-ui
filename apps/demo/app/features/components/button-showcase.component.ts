@@ -2,7 +2,7 @@ import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent, CardComponent, TabsComponent, TableComponent } from '@apsara/ui';
 import { CodeSnippetComponent } from '../../shared/components/code-snippet/code-snippet.component';
-import { LucideAngularModule, Plus, ArrowRight, Download } from 'lucide-angular';
+import { LucideAngularModule, Plus, ArrowRight, Download, LoaderCircle } from 'lucide-angular';
 
 interface ButtonProp {
   name: string;
@@ -26,19 +26,19 @@ interface ButtonProp {
           @if (mainPreviewTab() === 'preview') {
             <div class="flex gap-4">
               <div class="flex flex-col gap-2 p-3">
-                <app-button label="Primary" variant="primary" />
+                <app-button variant="primary">Primary</app-button>
               </div>
               <div class="flex flex-col gap-2 p-3">
-                <app-button label="Secondary" variant="secondary" />
+                <app-button variant="secondary">Secondary</app-button>
               </div>
               <div class="flex flex-col gap-2 p-3">
-                <app-button label="Destructive" variant="destructive" />
+                <app-button variant="destructive">Destructive</app-button>
               </div>
               <div class="flex flex-col gap-2 p-3">
-                <app-button label="Outline" variant="outline" />
+                <app-button variant="outline">Outline</app-button>
               </div>
               <div class="flex flex-col gap-2 p-3">
-                <app-button label="Plain" variant="plain" />
+                <app-button variant="plain">Plain</app-button>
               </div>
             </div>
           } @else {
@@ -64,10 +64,10 @@ interface ButtonProp {
           <app-tabs [options]="previewCodeOptions" [modelValue]="sizesTab()" (changed)="sizesTab.set($event)">
             @if (sizesTab() === 'preview') {
               <div class="flex flex-wrap items-center gap-4 p-3">
-                <app-button label="XS" size="xs" />
-                <app-button label="SM" size="sm" />
-                <app-button label="MD" size="md" />
-                <app-button label="LG" size="lg" />
+                <app-button size="xs">XS</app-button>
+                <app-button size="sm">SM</app-button>
+                <app-button size="md">MD</app-button>
+                <app-button size="lg">LG</app-button>
                 <app-button size="icon" variant="primary">
                   <lucide-angular [img]="Plus" />
                 </app-button>
@@ -85,10 +85,10 @@ interface ButtonProp {
           <app-tabs [options]="previewCodeOptions" [modelValue]="statesTab()" (changed)="statesTab.set($event)">
             @if (statesTab() === 'preview') {
               <div class="flex flex-wrap items-center gap-4 p-3">
-                <app-button label="Default" />
-                <app-button label="Disabled" [disabled]="true" />
-                <app-button label="Loading" [loading]="true" />
-                <app-button label="Block" [block]="true" />
+                <app-button>Default</app-button>
+                <app-button [disabled]="true">Disabled</app-button>
+                <app-button><lucide-angular [img]="LoaderCircle" [class]="'animate-spin mr-2'" />Loading</app-button>
+                <app-button [block]="true">Block</app-button>
               </div>
             } @else {
               <app-code-snippet [code]="statesCode" language="html" />
@@ -103,17 +103,17 @@ interface ButtonProp {
           <app-tabs [options]="previewCodeOptions" [modelValue]="iconsTab()" (changed)="iconsTab.set($event)">
             @if (iconsTab() === 'preview') {
               <div class="flex flex-wrap items-center gap-4 p-3">
-                <app-button label="Add" variant="primary">
-                  <lucide-angular [img]="Plus" />
+                <app-button variant="primary">
+                  <lucide-angular [img]="Plus" />Add
                 </app-button>
-                <app-button label="Next" variant="primary">
-                  <lucide-angular [img]="ArrowRight" />
+                <app-button variant="primary">
+                  <lucide-angular [img]="ArrowRight" />Next
                 </app-button>
                 <app-button variant="primary">
                   <lucide-angular [img]="Plus" />
                 </app-button>
-                <app-button label="Download" variant="secondary">
-                  <lucide-angular [img]="Download" />
+                <app-button variant="secondary">
+                  <lucide-angular [img]="Download" class="mr-1" />Download
                 </app-button>
               </div>
             } @else {
@@ -144,6 +144,7 @@ export class ButtonShowcaseComponent {
   Plus = Plus;
   ArrowRight = ArrowRight;
   Download = Download;
+  LoaderCircle = LoaderCircle;
   previewCodeOptions = [
     { value: 'preview', label: 'Preview' },
     { value: 'code', label: 'Code' }
@@ -158,37 +159,37 @@ export class ButtonShowcaseComponent {
 
   importCode = `import { ButtonComponent } from '@apsara/ui/button';`;
 
-  usageCode = `<app-button
-  label="Click me"
-  variant="primary"
-  size="md"
-  (clicked)="onClick($event)" />`;
+  usageCode = `<app-button variant="primary" (clicked)="onClick($event)">
+  Click me
+</app-button>`;
 
-  variantsCode = `<app-button label="Primary" variant="primary" />
- <app-button label="Secondary" variant="secondary" />
- <app-button label="Destructive" variant="destructive" />
- <app-button label="Outline" variant="outline" />
- <app-button label="Plain" variant="plain" />`;
+  variantsCode = `<app-button variant="primary">Primary</app-button>
+<app-button variant="secondary">Secondary</app-button>
+<app-button variant="destructive">Destructive</app-button>
+<app-button variant="outline">Outline</app-button>
+<app-button variant="plain">Plain</app-button>`;
 
-  sizesCode = `<app-button label="XS" size="xs" />
-<app-button label="SM" size="sm" />
-<app-button label="MD" size="md" />
-<app-button label="LG" size="lg" />
+  sizesCode = `<app-button size="xs">XS</app-button>
+<app-button size="sm">SM</app-button>
+<app-button size="md">MD</app-button>
+<app-button size="lg">LG</app-button>
 <app-button size="icon" variant="primary">
   <lucide-angular [img]="Plus" />
 </app-button>`;
 
-  statesCode = `<app-button label="Default" />
-<app-button label="Disabled" [disabled]="true" />
-<app-button label="Loading" [loading]="true" />
-<app-button label="Block" [block]="true" />`;
+  statesCode = `<app-button>Default</app-button>
+<app-button [disabled]="true">Disabled</app-button>
+<app-button>
+  <lucide-angular [img]="LoaderCircle" [class]="'animate-spin'" />Loading
+</app-button>
+<app-button [block]="true">Block</app-button>`;
 
-  iconsCode = `<app-button label="Add" variant="primary">
-  <lucide-angular [img]="Plus" />
+  iconsCode = `<app-button variant="primary">
+  <lucide-angular [img]="Plus" />Add
 </app-button>
 
-<app-button label="Next" variant="primary">
-  <lucide-angular [img]="ArrowRight" />
+<app-button variant="primary">
+  <lucide-angular [img]="ArrowRight" />Next
 </app-button>
 
 <app-button variant="primary">
@@ -196,11 +197,9 @@ export class ButtonShowcaseComponent {
 </app-button>`;
 
   propsData = (): ButtonProp[] => [
-    { name: 'label', type: 'string', description: 'Button text content' },
     { name: 'variant', type: "'primary' | 'secondary' | 'destructive' | 'outline' | 'plain'", description: 'Visual style variant' },
     { name: 'size', type: "'xs' | 'sm' | 'md' | 'lg' | 'icon'", description: 'Button size' },
     { name: 'disabled', type: 'boolean', description: 'Disables the button' },
-    { name: 'loading', type: 'boolean', description: 'Shows loading spinner' },
     { name: 'block', type: 'boolean', description: 'Makes button full width' },
     { name: 'clicked', type: 'EventEmitter<Event>', description: 'Emitted on button click' }
   ];

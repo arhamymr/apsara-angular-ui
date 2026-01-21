@@ -29,10 +29,10 @@ interface SnackbarProp {
           @if (basicTab() === 'preview') {
             <div class="p-6">
               <div class="flex flex-wrap gap-3">
-                <app-button label="Show Success" (clicked)="showSnackbar('success')" />
-                <app-button label="Show Error" variant="destructive" (clicked)="showSnackbar('error')" />
-                <app-button label="Show Info" variant="secondary" (clicked)="showSnackbar('info')" />
-                <app-button label="Show with Action" variant="plain" (clicked)="showSnackbar('action')" />
+                <app-button (clicked)="showSnackbar('success')">Show Success</app-button>
+                <app-button variant="destructive" (clicked)="showSnackbar('error')">Show Error</app-button>
+                <app-button variant="secondary" (clicked)="showSnackbar('info')">Show Info</app-button>
+                <app-button variant="plain" (clicked)="showSnackbar('action')">Show with Action</app-button>
               </div>
             </div>
           } @else {
@@ -103,9 +103,9 @@ export class SnackbarShowcaseComponent {
   [duration]="4000"
   (closed)="onClose()" />`;
 
-  basicCode = `<app-button label="Show Success" (clicked)="showSnackbar('success')" />
-<app-button label="Show Error" variant="destructive" (clicked)="showSnackbar('error')" />
-<app-button label="Show Info" variant="secondary" (clicked)="showSnackbar('info')" />
+  basicCode = `<app-button (clicked)="showSnackbar('success')">Show Success</app-button>
+<app-button variant="destructive" (clicked)="showSnackbar('error')">Show Error</app-button>
+<app-button variant="secondary" (clicked)="showSnackbar('info')">Show Info</app-button>
 
 <app-snackbar
   [isOpen]="snackbarOpen()"

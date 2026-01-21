@@ -14,9 +14,9 @@ import { CardComponent, ButtonComponent } from '@apsara/ui';
       </div>
       <div class="flex-1 flex items-center justify-center min-h-[150px]">
         <div class="flex gap-2">
-          <app-button label="File" variant="outline" size="sm" />
-          <app-button label="Edit" variant="outline" size="sm" />
-          <app-button label="View" variant="outline" size="sm" />
+          <app-button variant="outline" size="sm">File</app-button>
+          <app-button variant="outline" size="sm">Edit</app-button>
+          <app-button variant="outline" size="sm">View</app-button>
         </div>
       </div>
     </app-card>

@@ -31,16 +31,16 @@ interface RippleProp {
             <div class="p-6">
               <div class="flex flex-wrap gap-4">
                 <app-ripple>
-                  <app-button label="Primary" />
+                  <app-button>Primary</app-button>
                 </app-ripple>
                 <app-ripple>
-                  <app-button label="Secondary" variant="secondary" />
+                  <app-button variant="secondary">Secondary</app-button>
                 </app-ripple>
                 <app-ripple>
-                  <app-button label="Outline" variant="outline" />
+                  <app-button variant="outline">Outline</app-button>
                 </app-ripple>
                 <app-ripple>
-                  <app-button label="Danger" variant="destructive" />
+                  <app-button variant="destructive">Danger</app-button>
                 </app-ripple>
               </div>
             </div>
@@ -94,7 +94,7 @@ interface RippleProp {
             @if (disabledTab() === 'preview') {
               <div class="p-6">
                 <app-ripple [disabled]="true">
-                  <app-button label="No Ripple Effect" variant="plain" />
+                  <app-button variant="plain">No Ripple Effect</app-button>
                 </app-ripple>
               </div>
             } @else {
@@ -138,14 +138,14 @@ export class RipplesShowcaseComponent {
   importCode = `import { RippleComponent } from '@apsara/ui/ripple';`;
 
   usageCode = `<app-ripple>
-  <app-button label="Click me" />
+  <app-button>Click me</app-button>
 </app-ripple>`;
 
   basicCode = `<app-ripple>
-  <app-button label="Primary" />
+  <app-button>Primary</app-button>
 </app-ripple>
 <app-ripple>
-  <app-button label="Secondary" variant="secondary" />
+  <app-button variant="secondary">Secondary</app-button>
 </app-ripple>`;
 
   customCode = `<app-ripple>
@@ -155,7 +155,7 @@ export class RipplesShowcaseComponent {
 </app-ripple>`;
 
   disabledCode = `<app-ripple [disabled]="true">
-  <app-button label="No Ripple Effect" variant="plain" />
+  <app-button variant="plain">No Ripple Effect</app-button>
 </app-ripple>`;
 
   propsData = (): RippleProp[] => [

@@ -18,7 +18,7 @@ import { LucideAngularModule, Inbox } from 'lucide-angular';
           <lucide-angular [img]="Inbox" [size]="48" />
           <span class="text-base font-semibold text-foreground">No messages yet</span>
           <span class="text-sm text-muted-foreground max-w-[200px]">Start a conversation by sending a message</span>
-          <app-button label="New Message" variant="primary" size="sm" />
+          <app-button variant="primary" size="sm">New Message</app-button>
         </div>
       </div>
     </app-card>

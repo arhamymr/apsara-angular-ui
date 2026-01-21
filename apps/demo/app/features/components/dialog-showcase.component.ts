@@ -29,9 +29,9 @@ interface DialogProp {
           @if (basicTab() === 'preview') {
             <div class="p-6">
               <div class="flex flex-wrap gap-3">
-                <app-button label="Open Simple Dialog" (clicked)="openDialog('simple')" />
-                <app-button label="Open Form Dialog" variant="secondary" (clicked)="openDialog('form')" />
-                  <app-button label="Open Confirmation" variant="destructive" (clicked)="openDialog('confirm')" />
+                <app-button (clicked)="openDialog('simple')">Open Simple Dialog</app-button>
+                <app-button variant="secondary" (clicked)="openDialog('form')">Open Form Dialog</app-button>
+                  <app-button variant="destructive" (clicked)="openDialog('confirm')">Open Confirmation</app-button>
               </div>
             </div>
           } @else {
@@ -76,8 +76,8 @@ interface DialogProp {
           </div>
         </div>
         <div dialog-actions class="flex gap-3">
-          <app-button label="Cancel" variant="plain" (clicked)="onDialogClose('form', { action: 'cancel' })" />
-          <app-button label="Submit" (clicked)="onDialogClose('form', { action: 'confirm' })" />
+          <app-button variant="plain" (clicked)="onDialogClose('form', { action: 'cancel' })">Cancel</app-button>
+          <app-button (clicked)="onDialogClose('form', { action: 'confirm' })">Submit</app-button>
         </div>
       </app-dialog>
 
@@ -89,8 +89,8 @@ interface DialogProp {
           Are you sure you want to delete this item? This action cannot be undone.
         </p>
         <div dialog-actions class="flex gap-3">
-          <app-button label="Cancel" variant="plain" (clicked)="onDialogClose('confirm', { action: 'cancel' })" />
-            <app-button label="Delete" variant="destructive" (clicked)="onDialogClose('confirm', { action: 'confirm' })" />
+          <app-button variant="plain" (clicked)="onDialogClose('confirm', { action: 'cancel' })">Cancel</app-button>
+            <app-button variant="destructive" (clicked)="onDialogClose('confirm', { action: 'confirm' })">Delete</app-button>
         </div>
       </app-dialog>
 

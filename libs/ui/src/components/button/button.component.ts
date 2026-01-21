@@ -30,9 +30,6 @@ const buttonVariants = cva(
       block: {
         true: 'w-full',
       },
-      loading: {
-        true: 'pointer-events-none opacity-70',
-      },
     },
     defaultVariants: {
       variant: 'primary',
@@ -47,26 +44,16 @@ const buttonVariants = cva(
   imports: [CommonModule, LucideAngularModule],
   template: `
     <button
-      [disabled]="disabled() || loading()"
-      [class.pointer-events-none]="disabled() || loading()"
-      [class.cursor-not-allowed]="disabled() || loading()"
+      [disabled]="disabled()"
+      [class.cursor-not-allowed]="disabled()"
       [class]="cn(
         buttonVariants({
           variant: variant(),
           size: size(),
-          block: block(),
-          loading: loading()
+          block: block()
         })
       )"
       (click)="onClick($event)">
-
-      @if (loading()) {
-        <lucide-angular [img]="LoaderCircle" [class]="'animate-spin shrink-0 ' + getLoaderSizeClass()" />
-      }
-
-      @if (label()) {
-        <span class="[&:has(+_*)]:sr-only">{{ label() }}</span>
-      }
 
       <ng-content />
     </button>
@@ -78,7 +65,6 @@ const buttonVariants = cva(
   `]
 })
 export class ButtonComponent {
-  readonly label = input<string>('');
   readonly variant = input<ButtonVariant>('primary');
   readonly size = input<ButtonSize>('md');
   readonly disabled = input<boolean>(false);

@@ -36,7 +36,7 @@ interface AlertProp {
                   <app-alert-title>Alert Title</app-alert-title>
                   <app-alert-description>Alert description goes here.</app-alert-description>
                   <app-alert-action>
-                    <app-button label="Action" variant="primary" size="sm" />
+                    <app-button variant="primary" size="sm">Action</app-button>
                   </app-alert-action>
                 </app-alert>
               </div>
@@ -46,7 +46,7 @@ interface AlertProp {
                   <app-alert-title>Payment failed</app-alert-title>
                   <app-alert-description>Check your card details and try again.</app-alert-description>
                   <app-alert-action>
-                    <app-button label="Retry" variant="primary" size="sm" />
+                    <app-button variant="primary" size="sm">Retry</app-button>
                   </app-alert-action>
                 </app-alert>
               </div>
@@ -56,7 +56,7 @@ interface AlertProp {
                   <app-alert-title>Success</app-alert-title>
                   <app-alert-description>Your changes have been saved successfully.</app-alert-description>
                   <app-alert-action>
-                    <app-button label="View" variant="primary" size="sm" />
+                    <app-button variant="primary" size="sm">View</app-button>
                   </app-alert-action>
                 </app-alert>
               </div>
@@ -66,7 +66,7 @@ interface AlertProp {
                   <app-alert-title>Warning</app-alert-title>
                   <app-alert-description>Some features may not work as expected.</app-alert-description>
                   <app-alert-action>
-                    <app-button label="Dismiss" variant="outline" size="sm" />
+                    <app-button variant="outline" size="sm">Dismiss</app-button>
                   </app-alert-action>
                 </app-alert>
               </div>
@@ -76,7 +76,7 @@ interface AlertProp {
                   <app-alert-title>Error</app-alert-title>
                   <app-alert-description>Message deleted successfully. This action cannot be undone.</app-alert-description>
                   <app-alert-action>
-                    <app-button label="Undo" variant="destructive" size="sm" />
+                    <app-button variant="destructive" size="sm">Undo</app-button>
                   </app-alert-action>
                 </app-alert>
               </div>
@@ -86,7 +86,7 @@ interface AlertProp {
                   <app-alert-title>Note</app-alert-title>
                   <app-alert-description>Some useful information here.</app-alert-description>
                   <app-alert-action>
-                    <app-button label="Learn more" variant="plain" size="sm" />
+                    <app-button variant="plain" size="sm">Learn more</app-button>
                   </app-alert-action>
                 </app-alert>
               </div>
@@ -141,7 +141,7 @@ interface AlertProp {
                     <app-alert-title>Changes saved</app-alert-title>
                     <app-alert-description>Your profile has been updated successfully.</app-alert-description>
                     <app-alert-action>
-                      <app-button label="Undo" variant="plain" size="sm" />
+                      <app-button variant="plain" size="sm">Undo</app-button>
                     </app-alert-action>
                   </app-alert>
                 </div>
@@ -199,7 +199,7 @@ export class AlertShowcaseComponent {
     Alert description goes here.
   </app-alert-description>
   <app-alert-action>
-    <app-button label="Action" />
+    <app-button>Action</app-button>
   </app-alert-action>
 </app-alert>`;
 
@@ -207,7 +207,7 @@ export class AlertShowcaseComponent {
   <app-alert-title>Alert Title</app-alert-title>
   <app-alert-description>Alert description goes here.</app-alert-description>
   <app-alert-action>
-    <app-button label="Action" variant="primary" size="sm" />
+    <app-button variant="primary" size="sm">Action</app-button>
   </app-alert-action>
 </app-alert>
 
@@ -215,7 +215,7 @@ export class AlertShowcaseComponent {
   <app-alert-title>Payment failed</app-alert-title>
   <app-alert-description>Check your card details and try again.</app-alert-description>
   <app-alert-action>
-    <app-button label="Retry" variant="primary" size="sm" />
+    <app-button variant="primary" size="sm">Retry</app-button>
   </app-alert-action>
 </app-alert>
 
@@ -223,7 +223,7 @@ export class AlertShowcaseComponent {
   <app-alert-title>Success</app-alert-title>
   <app-alert-description>Your changes have been saved successfully.</app-alert-description>
   <app-alert-action>
-    <app-button label="View" variant="primary" size="sm" />
+    <app-button variant="primary" size="sm">View</app-button>
   </app-alert-action>
 </app-alert>
 
@@ -231,7 +231,7 @@ export class AlertShowcaseComponent {
   <app-alert-title>Warning</app-alert-title>
   <app-alert-description>Some features may not work as expected.</app-alert-description>
   <app-alert-action>
-    <app-button label="Dismiss" variant="outline" size="sm" />
+    <app-button variant="outline" size="sm">Dismiss</app-button>
   </app-alert-action>
 </app-alert>
 
@@ -239,7 +239,7 @@ export class AlertShowcaseComponent {
   <app-alert-title>Error</app-alert-title>
   <app-alert-description>Message deleted successfully.</app-alert-description>
   <app-alert-action>
-    <app-button label="Undo" variant="destructive" size="sm" />
+    <app-button variant="destructive" size="sm">Undo</app-button>
   </app-alert-action>
 </app-alert>
 
@@ -247,7 +247,7 @@ export class AlertShowcaseComponent {
   <app-alert-title>Note</app-alert-title>
   <app-alert-description>Some useful information here.</app-alert-description>
   <app-alert-action>
-    <app-button label="Learn more" variant="plain" size="sm" />
+    <app-button variant="plain" size="sm">Learn more</app-button>
   </app-alert-action>
 </app-alert>`;
 
@@ -263,7 +263,7 @@ export class AlertShowcaseComponent {
   <app-alert-title>Changes saved</app-alert-title>
   <app-alert-description>Your profile has been updated successfully.</app-alert-description>
   <app-alert-action>
-    <app-button label="Undo" variant="plain" size="sm" />
+    <app-button variant="plain" size="sm">Undo</app-button>
   </app-alert-action>
 </app-alert>`;
 
