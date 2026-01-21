@@ -17,13 +17,7 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-<<<<<<< HEAD
-RUN corepack enable && corepack prepare pnpm@latest --activate && \
-    pnpm setup && \
-    pnpm add -g serve
-=======
 COPY --from=builder /app/dist/apps/demo/browser /app
->>>>>>> 9d908aa33288802733adacaceba22bc766dd63c6
 
 RUN npm install -g http-server
 
