@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LucideAngularModule, AlertTriangle, Zap, FileText, Type, Smartphone, CheckSquare, Circle, ToggleLeft, ToggleRight, TextCursorInput, List, Search, Calendar, Clock, ChevronDown, Menu, ArrowRight, Grid, Table, Heart, Tag, RefreshCw, Minus, Maximize2, Info, Bell, ArrowDown, Palette, Terminal, Book, ExternalLink } from 'lucide-angular';
+import { CardComponent } from '@apsara/ui';
 
 interface ComponentItem {
   id: string;
@@ -17,17 +18,17 @@ interface ComponentCategory {
 @Component({
   selector: 'app-components-overview',
   standalone: true,
-  imports: [RouterLink, LucideAngularModule],
+  imports: [RouterLink, LucideAngularModule, CardComponent],
   template: `
     <div class="min-h-screen bg-background text-foreground">
-      <header class="text-center bg-muted px-8 py-16">
+      <app-card padding="large" align="center" class="w-full mx-auto px-6 mb-16">
         <h1 class="text-[2.5rem] font-medium mb-4 text-foreground">Components</h1>
         <p class="text-[1.125rem] text-muted-foreground max-w-[600px] mx-auto leading-relaxed">
           A comprehensive library of accessible, customizable, and performant UI components
         </p>
-      </header>
+      </app-card>
 
-      <main class="max-w-[1400px] mx-auto pt-16">
+      <main class="max-w-[1400px] mx-auto">
         @for (category of categories; track category.name) {
           <section class="mb-14">
             <h2 class="text-[1.25rem] font-medium text-foreground mb-6 pb-3 border-b border-border">

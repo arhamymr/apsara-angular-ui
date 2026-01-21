@@ -1,3 +1,5 @@
+<img src="https://assets.apsaradigital.com/aether-logo-white.png" alt="Aether UI Logo" width="200">
+
 # aether-ui (v0 Alpha)
 
 A customizable UI component library and CLI for Angular. Copy components directly into your project with full customization control.

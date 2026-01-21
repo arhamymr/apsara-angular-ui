@@ -4,7 +4,7 @@ import { dirname, join } from 'path';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
-const PORT = parseInt(process.env.PORT || '4200', 10);
+const PORT = 4200
 
 app.use(express.static(join(__dirname, 'browser')));
 

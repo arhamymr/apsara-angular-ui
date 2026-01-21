@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LucideAngularModule, Rocket, Palette, Terminal, Book, ExternalLink, ArrowRight } from 'lucide-angular';
+import { CardComponent } from '@apsara/ui';
 
 interface DocSection {
   id: string;
@@ -12,17 +13,17 @@ interface DocSection {
 @Component({
   selector: 'app-docs-overview',
   standalone: true,
-  imports: [RouterLink, LucideAngularModule],
+  imports: [RouterLink, LucideAngularModule, CardComponent],
   template: `
     <div class="min-h-screen bg-background text-foreground">
-      <header class="text-center bg-muted border-b border-border px-8 py-16">
+      <app-card padding="large" align="center" class="w-full mx-auto px-6 mb-16">
         <h1 class="text-[2.5rem] font-medium mb-4 text-foreground">Documentation</h1>
         <p class="text-[1.125rem] text-muted-foreground max-w-[600px] mx-auto leading-relaxed">
           Everything you need to know to get started and make the most of Apsara Angular DevKit
         </p>
-      </header>
+      </app-card>
 
-      <main class="max-w-[1400px] mx-auto pt-16">
+      <main class="max-w-[1400px] mx-auto">
         <section class="mb-14">
           <div class="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-4">
             @for (section of sections; track section.id) {

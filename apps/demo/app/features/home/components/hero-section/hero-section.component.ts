@@ -7,7 +7,7 @@ import { ButtonComponent, CardComponent } from '@apsara/ui';
   standalone: true,
   imports: [ButtonComponent, CardComponent],
   template: `
-    <app-card padding="large" align="center" class="w-full max-w-4xl mx-auto">
+    <app-card padding="large" align="center" class="w-full mx-auto px-6">
       <h1 class="text-4xl md:text-5xl mb-4 leading-tight">Angular Components UI</h1>
       <p class="max-w-2xl mx-auto text-lg md:text-xl opacity-90 mb-8 leading-relaxed">
         A comprehensive Angular component library built with Angular Material.
