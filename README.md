@@ -1,4 +1,4 @@
-# aether-ui
+# aether-ui (v0 Alpha)
 
 A customizable UI component library and CLI for Angular. Copy components directly into your project with full customization control.
 
