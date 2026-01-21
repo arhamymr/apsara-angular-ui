@@ -10,7 +10,7 @@ RUN pnpm install --frozen-lockfile
 
 COPY . .
 
-RUN npx nx run demo:build --configuration=production
+RUN npx ng build demo --configuration=production
 
 # Stage 2: Production - Serve with Express
 FROM node:20-alpine
