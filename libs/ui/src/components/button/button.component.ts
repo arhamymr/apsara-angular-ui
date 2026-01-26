@@ -14,11 +14,11 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-primary ring ring-border inset-shadow-2xs inset-shadow-white/50',
-        secondary: 'bg-secondary text-secondary-foreground ring ring-border inset-shadow-2xs inset-shadow-white/15',
-        destructive: 'bg-destructive text-destructive-foreground ring ring-border inset-shadow-2xs inset-shadow-white/50',
-        outline: 'text-primary ring ring-1 ring-border',
-        plain: 'bg-transparent text-primary ring-0 shadow-none',
+        default: 'bg-primary text-white border border-white/20 shadow-sm',
+        secondary: 'bg-secondary text-secondary-foreground border border-black/5 shadow-sm',
+        destructive: 'bg-destructive text-destructive-foreground border border-white/20 shadow-sm',
+        outline: 'text-primary border border-border',
+        plain: 'bg-transparent',
       },
       size: {
         'xs': 'h-7 px-2 text-xs *:[svg]:size-3',
@@ -50,11 +50,11 @@ const buttonVariants = cva(
         buttonVariants({
           variant: variant(),
           size: size(),
-          block: block()
-        })
+          block: block(),
+        }),
+        class()
       )"
       (click)="onClick($event)">
-
       <ng-content />
     </button>
   `,
@@ -70,6 +70,7 @@ export class ButtonComponent {
   readonly disabled = input<boolean>(false);
   readonly loading = input<boolean>(false);
   readonly block = input<boolean>(false);
+  readonly class= input<string>('');
   readonly clicked = output<Event>();
 
   readonly LoaderCircle = LoaderCircle;

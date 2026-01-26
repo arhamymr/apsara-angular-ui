@@ -26,20 +26,14 @@ import { LucideAngularModule, Sun, Moon } from 'lucide-angular';
           </span>
         </div>
 
-        <div class="flex items-center gap-1">
-          <a routerLink="/components" routerLinkActive="bg-accent text-foreground" [routerLinkActiveOptions]="{exact: false}"
-             class="text-foreground no-underline px-4 py-2 rounded-md text-sm font-medium transition-colors hover:bg-accent">
+        <div class="flex items-center gap-4">
+          <app-button variant="plain" routerLink="/components" routerLinkActive="text-foreground rounded-xl font-medium bg-accent/50" [routerLinkActiveOptions]="{exact: false}" class="text-foreground">
             Components
-          </a>
-          <a routerLink="/docs" routerLinkActive="bg-accent text-foreground"
-             class="text-foreground no-underline px-4 py-2 rounded-md text-sm font-medium transition-colors hover:bg-accent">
-            Docs
-          </a>
-
+          </app-button>
+          <app-button variant="plain" routerLink="/docs" routerLinkActive="text-foreground rounded-xl font-medium bg-accent/50">Docs</app-button>
           <app-button
-            variant="plain"
+            variant="outline"
             size="icon"
-            class="ml-2"
             (clicked)="themeService.toggle()">
             @if (themeService.theme() === 'dark') {
               <lucide-angular [img]="Sun" [size]="16" />

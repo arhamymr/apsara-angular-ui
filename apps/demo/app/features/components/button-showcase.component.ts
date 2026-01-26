@@ -124,6 +124,25 @@ interface ButtonProp {
       </div>
 
       <div class="mt-8">
+        <h3 class="text-lg font-semibold text-foreground mb-4">Custom Class</h3>
+        <app-card>
+          <app-tabs [options]="previewCodeOptions" [modelValue]="customClassTab()" (changed)="customClassTab.set($event)">
+            @if (customClassTab() === 'preview') {
+              <div class="flex flex-wrap items-center gap-4 p-3">
+                <app-button class="hover:scale-105 transition-transform">Custom Scale</app-button>
+                <app-button variant="secondary" class="rotate-90">Rotated</app-button>
+                <app-button variant="outline" class="border-2 border-dashed">Dashed Border</app-button>
+                <app-button class="bg-green-600 hover:bg-green-700 text-white">Green Color</app-button>
+                <app-button class="bg-gradient-to-r from-purple-500 to-pink-500 text-white">Gradient</app-button>
+              </div>
+            } @else {
+              <app-code-snippet [code]="customClassCode" language="html" />
+            }
+          </app-tabs>
+        </app-card>
+      </div>
+
+      <div class="mt-8">
         <h3 class="text-lg font-semibold text-foreground mb-4">Props</h3>
         <ng-template #tableHeader>
           <th class="text-left p-3 bg-muted font-semibold text-muted-foreground text-xs uppercase tracking-wide">Prop</th>
@@ -154,6 +173,7 @@ export class ButtonShowcaseComponent {
   sizesTab = signal<string>('preview');
   statesTab = signal<string>('preview');
   iconsTab = signal<string>('preview');
+  customClassTab = signal<string>('preview');
 
   installCode = `npm install @apsara/ui/button`;
 
@@ -196,11 +216,18 @@ export class ButtonShowcaseComponent {
   <lucide-angular [img]="Plus" />
 </app-button>`;
 
+  customClassCode = `<app-button class="hover:scale-105 transition-transform">Custom Scale</app-button>
+<app-button variant="secondary" class="rotate-90">Rotated</app-button>
+<app-button variant="outline" class="border-dashed">Dashed Border</app-button>
+<app-button class="bg-green-600 hover:bg-green-700 text-white">Green Color</app-button>
+<app-button class="bg-gradient-to-r from-purple-500 to-pink-500 text-white">Gradient</app-button>`;
+
   propsData = (): ButtonProp[] => [
     { name: 'variant', type: "'default' | 'secondary' | 'destructive' | 'outline' | 'plain'", description: 'Visual style variant' },
     { name: 'size', type: "'xs' | 'sm' | 'md' | 'lg' | 'icon'", description: 'Button size' },
     { name: 'disabled', type: 'boolean', description: 'Disables the button' },
     { name: 'block', type: 'boolean', description: 'Makes button full width' },
+    { name: 'class', type: 'string', description: 'Custom CSS classes to apply' },
     { name: 'clicked', type: 'EventEmitter<Event>', description: 'Emitted on button click' }
   ];
 }

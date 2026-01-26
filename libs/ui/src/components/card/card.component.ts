@@ -9,7 +9,7 @@ import { cn } from '../../lib/cn';
   template: `
     <div
       [class]="cn(
-        'bg-card border rounded-xl transition-shadow',
+        'bg-card border rounded-2xl transition-shadow',
         padding() === 'none' && 'p-0',
         padding() === 'small' && 'p-3',
         padding() === 'medium' && 'p-5',

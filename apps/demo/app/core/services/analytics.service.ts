@@ -7,8 +7,8 @@ export class AnalyticsService {
   private id = ''
 
   constructor(
-    private platformId: object,
-    private document: Document,
+    @Inject(PLATFORM_ID) private platformId: object,
+    @Inject(DOCUMENT) private document: Document,
     private router: Router
   ) {
     if (!isPlatformBrowser(this.platformId)) return
