@@ -18,12 +18,12 @@ import { cn } from '../../lib/cn';
         (click)="onToggle()"
         class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors
                focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2
-               disabled:opacity-50 disabled:cursor-not-allowed"
+               disabled:opacity-50 disabled:cursor-not-allowed border"
         [class.bg-primary]="isChecked()"
-        [class.bg-gray-200]="!isChecked()">
+        [class.bg-input]="!isChecked()">
         <span
-          class="inline-block h-4 w-4 transform rounded-full bg-white transition-transform shadow-sm
-                 pointer-events-none"
+          class="inline-block h-4 w-4 transform rounded-full bg-card transition-transform shadow-sm
+                 pointer-events-none border"
           [class.translate-x-6]="isChecked()"
           [class.translate-x-1]="!isChecked()"></span>
       </button>

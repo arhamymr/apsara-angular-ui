@@ -44,6 +44,8 @@
   "license": "MIT",
   "dependencies": {
     "@angular/animations": "^21.1.0",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.4.0",
     "tslib": "^2.6.0"
   }
 }

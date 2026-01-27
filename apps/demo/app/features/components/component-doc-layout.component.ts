@@ -93,7 +93,7 @@ interface ComponentCategory {
       <nav class="py-4 px-0">
         <a routerLink="/components" 
            (click)="closeMobileSidebar()"
-           class="flex items-center gap-2 py-3 px-6 text-[color:var(--foreground-variant,#666)] no-underline text-sm mb-4 hover:text-primary transition-colors duration-150">
+           class="flex items-center gap-2 py-3 px-6 text-[color:var(--foreground-variant,#666)] no-underline text-sm mb-4 transition-colors duration-150">
           <lucide-angular [img]="ArrowLeft" class="!text-[18px] !w-[18px] !h-[18px]"></lucide-angular>
           <span>Back to Overview</span>
         </a>
@@ -129,7 +129,7 @@ interface ComponentCategory {
                   <li>
                     <a [routerLink]="'/components/' + item.id"
                        (click)="closeMobileSidebar()"
-                       routerLinkActive="bg-card text-primary"
+                       routerLinkActive="bg-card text-primary rounded-xl"
                        class="flex items-center gap-3 py-2.5 px-6 text-[color:var(--foreground,#1a1b1f)] no-underline text-sm transition-all duration-150 hover:bg-primary/10">
                       <lucide-angular [img]="item.icon" class="!text-[20px] !w-[20px] !h-[20px] text-[color:var(--foreground-variant,#666)]"></lucide-angular>
                       <span>{{ item.title }}</span>
