@@ -110,7 +110,7 @@ export class ComponentsOverviewComponent {
         { id: 'input', title: 'Input', icon: TextCursorInput, description: 'Text field for user entry' },
         { id: 'select', title: 'Select', icon: List, description: 'Dropdown selection control' },
         { id: 'autocomplete', title: 'Autocomplete', icon: Search, description: 'Searchable dropdown' },
-        { id: 'datepicker', title: 'Datepicker', icon: Calendar, description: 'Date selection input' },
+
         { id: 'timepicker', title: 'Timepicker', icon: Clock, description: 'Time selection input' },
         { id: 'slider', title: 'Slider', icon: ArrowUpDown, description: 'Range selection control' },
         { id: 'chips', title: 'Chips', icon: Tag, description: 'Compact elements selection' }
@@ -155,12 +155,6 @@ export class ComponentsOverviewComponent {
         { id: 'tooltip', title: 'Tooltip', icon: Info, description: 'Informational tooltip' },
         { id: 'sonner', title: 'Sonner', icon: Bell, description: 'An opinionated toast component for Angular' },
         { id: 'bottom-sheet', title: 'Bottom Sheet', icon: ArrowDownToLine, description: 'Slide-up panel' }
-      ]
-    },
-    {
-      name: 'Utility',
-      items: [
-        { id: 'ripples', title: 'Ripples', icon: Loader, description: 'Ripple interaction effect' }
       ]
     }
   ];

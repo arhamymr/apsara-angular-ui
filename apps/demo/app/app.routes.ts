@@ -1,13 +1,12 @@
 import { Routes } from '@angular/router';
-import { HomeComponent, DocsOverviewComponent, DocsLayoutComponent } from './features';
+import { HomeComponent, DocsLayoutComponent } from './features';
 import { NotFoundComponent } from './features/home/not-found.component';
 import { ComponentsOverviewComponent } from './features/components/components-overview.component';
 import { ComponentDocLayoutComponent } from './features/components/component-doc-layout.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'docs', component: DocsOverviewComponent },
-    {
+  {
     path: 'docs',
     component: DocsLayoutComponent,
     children: [
@@ -35,7 +34,7 @@ export const routes: Routes = [
       { path: 'button-toggle', loadComponent: () => import('./features/components/button-toggle-showcase.component').then(m => m.ButtonToggleShowcaseComponent) },
       { path: 'select', loadComponent: () => import('./features/components/select-showcase.component').then(m => m.SelectShowcaseComponent) },
       { path: 'autocomplete', loadComponent: () => import('./features/components/autocomplete-showcase.component').then(m => m.AutocompleteShowcaseComponent) },
-      { path: 'datepicker', loadComponent: () => import('./features/components/datepicker-showcase.component').then(m => m.DatepickerShowcaseComponent) },
+
       { path: 'timepicker', loadComponent: () => import('./features/components/timepicker-showcase.component').then(m => m.TimepickerShowcaseComponent) },
       { path: 'slider', loadComponent: () => import('./features/components/slider-showcase.component').then(m => m.SliderShowcaseComponent) },
       { path: 'chips', loadComponent: () => import('./features/components/chips-showcase.component').then(m => m.ChipsShowcaseComponent) },
@@ -56,8 +55,7 @@ export const routes: Routes = [
       { path: 'bottom-sheet', loadComponent: () => import('./features/components/bottom-sheet-showcase.component').then(m => m.BottomSheetShowcaseComponent) },
       { path: 'divider', loadComponent: () => import('./features/components/divider-showcase.component').then(m => m.DividerShowcaseComponent) },
       { path: 'grid-list', loadComponent: () => import('./features/components/grid-list-showcase.component').then(m => m.GridListShowcaseComponent) },
-      { path: 'stepper', loadComponent: () => import('./features/components/stepper-showcase.component').then(m => m.StepperShowcaseComponent) },
-      { path: 'ripples', loadComponent: () => import('./features/components/ripples-showcase.component').then(m => m.RipplesShowcaseComponent) }
+      { path: 'stepper', loadComponent: () => import('./features/components/stepper-showcase.component').then(m => m.StepperShowcaseComponent) }
     ]
   },
   { path: '**', component: NotFoundComponent }

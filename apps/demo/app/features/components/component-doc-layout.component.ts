@@ -214,7 +214,7 @@ export class ComponentDocLayoutComponent {
         { id: 'input', title: 'Input', icon: TextSelect },
         { id: 'select', title: 'Select', icon: List },
         { id: 'autocomplete', title: 'Autocomplete', icon: Search },
-        { id: 'datepicker', title: 'Datepicker', icon: Calendar },
+
         { id: 'timepicker', title: 'Timepicker', icon: Clock },
         { id: 'slider', title: 'Slider', icon: ArrowUpDown },
         { id: 'chips', title: 'Chips', icon: Tag }
@@ -259,12 +259,6 @@ export class ComponentDocLayoutComponent {
         { id: 'tooltip', title: 'Tooltip', icon: Info },
         { id: 'sonner', title: 'Sonner', icon: Bell },
         { id: 'bottom-sheet', title: 'Bottom Sheet', icon: ArrowDownToLine }
-      ]
-    },
-    {
-      name: 'Utility',
-      items: [
-        { id: 'ripples', title: 'Ripples', icon: Loader }
       ]
     }
   ];

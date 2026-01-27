@@ -31,7 +31,7 @@ import { LucideAngularModule, Sun, Moon, Menu, X } from 'lucide-angular';
             <app-button variant="plain" routerLink="/components" routerLinkActive="text-foreground rounded-xl font-medium bg-accent/50" [routerLinkActiveOptions]="{exact: false}" class="text-foreground">
               Components
             </app-button>
-            <app-button variant="plain" routerLink="/docs" routerLinkActive="text-foreground rounded-xl font-medium bg-accent/50">Docs</app-button>
+            <app-button variant="plain" routerLink="/docs/getting-started" routerLinkActive="text-foreground rounded-xl font-medium bg-accent/50">Docs</app-button>
             <app-button
               variant="outline"
               size="icon"
@@ -75,7 +75,7 @@ import { LucideAngularModule, Sun, Moon, Menu, X } from 'lucide-angular';
           <span class="flex-1">Components</span>
         </a>
         <a
-          routerLink="/docs"
+          routerLink="/docs/getting-started"
           (click)="closeMobileMenu()"
           class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-accent text-foreground transition-colors cursor-pointer">
           <span class="flex-1">Docs</span>

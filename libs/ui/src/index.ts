@@ -27,7 +27,6 @@ export * from './components/chips';
 export * from './components/slider';
 export * from './components/datepicker';
 export * from './components/timepicker';
-export * from './components/ripples';
 export * from './components/sidenav';
 export * from './components/accordion';
 export * from './components/bottom-sheet';

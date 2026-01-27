@@ -1,4 +1,4 @@
-export { DocsOverviewComponent } from './docs-overview.component';
+
 export { DocsLayoutComponent } from './docs-layout.component';
 export { GettingStartedComponent } from './getting-started.component';
 export { ThemingComponent } from './theming.component';
